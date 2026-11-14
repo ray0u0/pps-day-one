@@ -1,0 +1,13 @@
+const fs=require('node:fs');
+const path=require('node:path');
+const root=__dirname;
+const target=path.join(root,'오늘부터_조달청.html');
+const old=fs.readFileSync(target,'utf8');
+const css=old.match(/<style>([\s\S]*?)<\/style>/)[1].split('/* STORY_V2 */')[0];
+const newCSS=fs.readFileSync(path.join(root,'story-v2.css'),'utf8');
+const asset=(name,mime)=>'data:'+mime+';base64,'+fs.readFileSync(path.join(root,'assets',name)).toString('base64');
+const logo=asset('pps-logo-horizontal.svg','image/svg+xml');
+const js='const BRAND_ASSETS='+JSON.stringify({characters:asset('narmi-dali.png','image/png')})+';\n'+fs.readFileSync(path.join(root,'game-v2.js'),'utf8');
+const html=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173c35"><title>오늘부터 조달청 — 첫 발령, 그다음 이야기</title><style>${css}\n/* STORY_V2 */\n${newCSS}</style></head><body><div class="wrap"><header class="top"><button class="brand" onclick="goHome()" aria-label="시작 화면"><img class="pps-logo" src="${logo}" alt="조달청"><span class="brand-game-title">오늘부터 조달청<small>첫 발령 이야기</small></span></button><nav class="nav" aria-label="게임 메뉴"><button onclick="showGuide()">플레이 안내</button><button id="sound" onclick="toggleSound()" aria-pressed="false">소리 꺼짐</button><button onclick="showAbout()">게임 소개</button></nav></header><main id="app"></main><footer class="footer"><span>오늘부터 조달청 · 첫 발령, 그다음 이야기 / STORY EDITION 05</span><span><button onclick="showSources()">공식 자료 탐험 노트 ↗</button> · 비공식 창작 게임</span></footer></div><div id="overlay"></div><div id="live" class="sr" aria-live="polite"></div><script>${js}</script></body></html>`;
+fs.writeFileSync(target,html,'utf8');
+console.log(`Built standalone HTML: ${Buffer.byteLength(html)} bytes`);
