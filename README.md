@@ -9,10 +9,9 @@
 
 ## GitHub Pages
 
-- 계정: **ray0u0**
-- 저장소: **jodal**
-- 게임 URL: `https://ray0u0.github.io/jodal/` (`docs/index.html` 배포)
+- 저장소: [ray0u0/pps-day-one](https://github.com/ray0u0/pps-day-one)
+- 게임 URL: **https://ray0u0.github.io/pps-day-one/** (`today-pps/` — Actions 배포)
 
-GitHub → **Settings → Pages → Build and deployment** 에서 Branch `main`, Folder `/docs` 를 선택하세요.
+`main`에 push하면 `.github/workflows/pages.yml`이 `today-pps`를 Pages에 올립니다.
 
 조달청 로고·나르미·달이 캐릭터 권리는 해당 권리자에게 있습니다. 공식 서비스가 아닙니다.
