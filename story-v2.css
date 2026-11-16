@@ -76,6 +76,8 @@
 .ending-recap p{font-size:14px;line-height:1.65;color:var(--ink);margin:0 0 8px}
 .ending-recap p:last-child{margin-bottom:0}
 .puzzle-feedback{font-weight:650}
+.map-pin.pin-rec{outline:2px solid #c56f47;outline-offset:3px;box-shadow:0 0 0 4px rgba(197,111,71,.25)}
+.map-pin.pin-rec span{font-weight:750}
 .chrome-focus .center{margin:20px auto 28px}
 .chrome-focus .appointment{padding:32px 28px}
 
