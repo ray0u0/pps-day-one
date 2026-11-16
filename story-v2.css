@@ -16,9 +16,67 @@
 .transfer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.transfer-grid button{background:#fff;border:1px solid #cbd9d5;border-radius:12px;padding:12px;text-align:left;color:inherit;cursor:pointer}.transfer-grid button:hover{border-color:#237e65;background:#eef8f3}.transfer-grid h3{font-size:15px;margin:8px 0}.transfer-grid p{font-size:12px;line-height:1.5;margin:0}.transfer-grid .chip{font-size:10px}
 
 /* User-provided official branding; original artwork and proportions preserved. */
-.brand{gap:18px}.pps-logo{display:block;width:126px;height:auto;object-fit:contain;background:white;border-radius:4px;padding:6px}.brand-game-title{font-size:15px;border-left:1px solid #cbd6ce;padding-left:16px;text-align:left}.brand-game-title small{display:block;font-size:10px;font-weight:400;margin-top:4px;color:#61776c}.mascot-welcome{display:flex;align-items:center;gap:20px;padding:14px 24px;background:#fff;border-top:1px solid #e2e9df}.mascot-welcome img{width:190px;height:auto;object-fit:contain;flex-shrink:0}.mascot-welcome p{font-size:15px;line-height:1.65;margin:8px 0 0}.mascot-welcome.compact{border:0;background:#f6f8f2;border-radius:12px;padding:10px 16px;margin-bottom:22px}.mascot-welcome.compact img{width:110px}.mascot-welcome.compact p{font-size:14px}@media(max-width:600px){.brand{gap:9px}.pps-logo{width:93px;padding:4px}.brand-game-title{font-size:12px;padding-left:9px}.brand-game-title small{font-size:9px}.mascot-welcome{padding:12px 16px;gap:12px}.mascot-welcome img{width:145px}.mascot-welcome p{font-size:13px}.mascot-welcome.compact img{width:90px}}
+.brand{gap:18px}.pps-logo{display:block;width:126px;height:auto;object-fit:contain;background:white;border-radius:4px;padding:6px}.brand-game-title{font-size:18px;font-weight:800;border-left:1px solid #cbd6ce;padding-left:16px;text-align:left;line-height:1.35}.brand-game-title small{display:block;font-size:12px;font-weight:500;margin-top:4px;color:#5a6e64}.top{height:auto;min-height:84px;padding:12px 0}.nav button{font-size:14px;font-weight:600;padding:10px 14px}.landing-voice{display:flex;align-items:center;gap:16px;padding:18px 24px 22px;background:#e9eddf;border-top:1px solid #d5ddd0}.landing-voice img{width:132px;height:auto;object-fit:contain;flex-shrink:0}.landing-voice .label{letter-spacing:.08em;text-transform:none;font-size:12px}.landing-voice p{font-size:17px;font-weight:750;line-height:1.65;margin:6px 0 8px}.landing-voice .fine{font-size:11px}.mascot-welcome{display:flex;align-items:center;gap:20px;padding:14px 24px;background:#fff;border-top:1px solid #e2e9df}.mascot-welcome img{width:190px;height:auto;object-fit:contain;flex-shrink:0}.mascot-welcome p{font-size:15px;line-height:1.65;margin:8px 0 0}.mascot-welcome.compact{border:0;background:#f6f8f2;border-radius:12px;padding:10px 16px;margin-bottom:22px}.mascot-welcome.compact img{width:110px}.mascot-welcome.compact p{font-size:14px}@media(max-width:600px){.brand{gap:9px}.pps-logo{width:93px;padding:4px}.brand-game-title{font-size:15px;padding-left:9px}.brand-game-title small{font-size:11px}.nav button{font-size:13px;padding:8px 10px}.landing-voice{flex-direction:column;align-items:flex-start;padding:16px 18px 18px}.landing-voice img{width:118px}.mascot-welcome{padding:12px 16px;gap:12px}.mascot-welcome img{width:145px}.mascot-welcome p{font-size:13px}.mascot-welcome.compact img{width:90px}}
 
 .pps-logo{background:transparent;padding:0;border-radius:0;width:116px;height:auto}@media(max-width:600px){.pps-logo{width:92px;padding:0}}
+
+@media(max-width:700px){.top .nav button{font-size:13px;padding:8px 12px}.top{min-height:72px}}
+
+/* Play overlay — 대화·선택 가독성 */
+.event-dialog{max-width:720px}
+.event-bar>span{font-size:14px;font-weight:750}
+.event-bar button{font-size:13px;padding:6px 10px}
+.event-dialog .paper-header{padding:18px 26px 14px}
+.event-dialog .paper-header .label{font-size:11px}
+.event-dialog .paper-header h2{font-size:27px;margin:10px 0 8px}
+.event-dialog .paper-header p{font-size:15px;line-height:1.75;color:var(--muted)}
+.event-dialog .paper-body{padding:16px 26px 22px}
+.event-dialog .dialogue{margin:12px 0 18px}
+.event-dialog .dialogue .label{font-size:12px;letter-spacing:0;text-transform:none}
+.event-dialog .dialogue .label small{font-size:11px}
+.event-dialog .dialogue p{font-size:16px;line-height:1.8;margin-top:8px}
+.event-dialog .portrait{flex-basis:42px;width:42px;height:48px;font-size:18px}
+.event-dialog .story-choice{padding:16px 44px 16px 18px;border-radius:8px}
+.event-dialog .story-choice span{font-size:15px;font-weight:750}
+.event-dialog .story-choice small{font-size:12px;line-height:1.55;margin-top:6px}
+.event-dialog .story-choice>b{top:17px;font-size:17px}
+.event-dialog .choice-stack{gap:10px;margin-top:16px}
+.event-dialog .hint{font-size:12px;line-height:1.65;margin-top:10px}
+.event-dialog .feedback{font-size:14px;line-height:1.65}
+.event-foot{font-size:12px;padding:12px 18px}
+.event-foot>button{font-size:13px}
+.play-toolbar .label{font-size:12px}
+.play-toolbar b{font-size:16px}
+.play-controls .btn,.play-controls select{font-size:13px;min-height:40px}
+.story-preview h2{font-size:26px}
+.story-preview>p{font-size:14px}
+.story-main .paper-header h2{font-size:28px}
+.story-main .paper-header p{font-size:15px}
+.story-main .dialogue p{font-size:16px}
+.story-main .story-choice span{font-size:15px}
+.story-main .story-choice small{font-size:12px}
+@media(max-width:700px){.event-dialog .paper-header h2{font-size:23px}.event-dialog .dialogue p{font-size:15px}.event-dialog .story-choice span{font-size:14px}.event-foot{font-size:11px}}
+.city-map-caption{margin:0;padding:10px 14px 4px;font-size:12px;line-height:1.5;color:#4f6559;text-align:center;background:#e9eddf;border-bottom:1px solid #d5ddd0}
+.compact-game .city-status{font-size:12px;padding:11px 8px}
+.chrome-focus .top{min-height:52px;height:auto;padding:6px 0}
+.chrome-focus .nav{display:none}
+.chrome-focus .brand-game-title small{display:none}
+.chrome-focus .footer{padding:10px 0 14px;font-size:10px}
+.chrome-focus .wrap{padding-top:0}
+.screen-end.wide-end,.center.screen-end{margin:12px auto 28px}
+.screen-end .ending-heading{padding:8px 0 14px}
+.screen-end .ending-heading h1{font-size:clamp(28px,3.2vw,36px);margin:10px 0}
+.screen-end .ending-heading p{font-size:13px}
+.screen-end .city-strip-end svg{max-height:155px}
+.screen-end .ending-body{padding:22px 24px}
+.screen-end .ending-lead{margin:16px 0;font-size:16px;line-height:1.8}
+.screen-end .ending-scenes{margin-top:18px;gap:16px}
+.ending-echo{margin:18px 0 20px;padding:16px 18px;background:#f3f0e4;border:1px solid #ddd6c4;border-radius:8px}
+.ending-echo .label{display:block;margin-bottom:10px}
+.ending-echo p{font-size:14px;line-height:1.75;color:var(--ink);margin:0 0 10px}
+.ending-echo p:last-child{margin-bottom:0}
+.chrome-focus .center{margin:20px auto 28px}
+.chrome-focus .appointment{padding:32px 28px}
 
 /* GAME_TYPE — 업무 UI(12–15)와 같은 계층 원칙, 스토리용으로 한 단계 키움
    Display(랜딩 h1) clamp 38–54 · 장면 제목 ~26–29 · 본문 15–16 · 보조 13–14 · 라벨 11–12 · 캡션 11
