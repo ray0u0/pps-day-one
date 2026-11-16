@@ -71,10 +71,11 @@
 .screen-end .ending-body{padding:22px 24px}
 .screen-end .ending-lead{margin:16px 0;font-size:16px;line-height:1.8}
 .screen-end .ending-scenes{margin-top:18px;gap:16px}
-.ending-echo{margin:18px 0 20px;padding:16px 18px;background:#f3f0e4;border:1px solid #ddd6c4;border-radius:8px}
-.ending-echo .label{display:block;margin-bottom:10px}
-.ending-echo p{font-size:14px;line-height:1.75;color:var(--ink);margin:0 0 10px}
-.ending-echo p:last-child{margin-bottom:0}
+.ending-recap{margin:18px 0 20px;padding:16px 18px;background:#fff8e8;border:1px solid #e8d4a8;border-radius:8px}
+.ending-recap .label{display:block;margin-bottom:10px;color:#8a5a1f}
+.ending-recap p{font-size:14px;line-height:1.65;color:var(--ink);margin:0 0 8px}
+.ending-recap p:last-child{margin-bottom:0}
+.puzzle-feedback{font-weight:650}
 .chrome-focus .center{margin:20px auto 28px}
 .chrome-focus .appointment{padding:32px 28px}
 
