@@ -1,3 +1,5 @@
+node_modules/
+assets/bgm-loop.wav
 .tools/
 __pycache__/
 *.pyc

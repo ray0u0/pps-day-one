@@ -62,8 +62,20 @@
 @media(max-width:700px){.event-dialog .paper-header h2{font-size:23px}.event-dialog .dialogue p{font-size:15px}.event-dialog .story-choice span{font-size:14px}.event-foot{font-size:11px}}
 .city-map-caption{margin:0;padding:10px 14px 4px;font-size:12px;line-height:1.5;color:#4f6559;text-align:center;background:#e9eddf;border-bottom:1px solid #d5ddd0}
 .compact-game .city-status{font-size:12px;padding:11px 8px}
-.chrome-focus .top{min-height:52px;height:auto;padding:6px 0}
-.chrome-focus .nav{display:none}
+.chrome-focus .top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;height:auto;padding:6px 0}
+.chrome-focus .nav{display:flex;align-items:center;margin-left:auto}
+.chrome-focus .nav button:not(.sound-toggle){display:none}
+.chrome-focus .nav .sound-toggle{display:inline-flex}
+.sound-toggle{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border:0;background:none;border-radius:6px;font-size:14px;font-weight:600;color:inherit}
+.sound-toggle:hover{background:var(--soft)}
+.sound-toggle.sound-on{color:var(--green)}
+.sound-toggle .sound-text{font:inherit;font-weight:inherit}
+.sound-toggle .sound-svg{flex-shrink:0;display:block;width:18px;height:18px;opacity:.92}
+.sound-toggle .icon-on[hidden],.sound-toggle.sound-off .icon-on{display:none!important}
+.sound-toggle .icon-off[hidden],.sound-toggle.sound-on .icon-off{display:none!important}
+.nav .sound-toggle{flex-shrink:0}
+.chrome-focus .sound-toggle .sound-text{display:none}
+@media(max-width:700px){.sound-toggle .sound-text{display:none}}
 .chrome-focus .brand-game-title small{display:none}
 .chrome-focus .footer{padding:10px 0 14px;font-size:10px}
 .chrome-focus .wrap{padding-top:0}

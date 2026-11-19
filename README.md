@@ -4,8 +4,10 @@
 
 ## 로컬 실행
 
-- 빌드된 단일 파일: `today-pps/index.html` 을 브라우저로 엽니다.
-- 소스 수정 후 재빌드: `node build-game.cjs` (루트의 `오늘부터_조달청.html` 갱신)
+- **권장:** `today-pps/index.html` (가벼운 HTML + `today-pps/assets/`의 이미지·`bgm-loop.mp3`)
+- 단일 파일(대용량): 루트 `오늘부터_조달청.html` — 이미지·BGM이 HTML 안에 들어 있음
+- 소스 수정 후: `node build-game.cjs` (위 두 HTML + Pages용 asset 복사)
+- 배경 루프 mp3 원본: `assets/bgm-loop.mp3` (`npm run bgm`으로 재생성)
 
 ## GitHub Pages
 

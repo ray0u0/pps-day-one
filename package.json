@@ -1,0 +1,11 @@
+{
+  "name": "pps-jodal-game",
+  "private": true,
+  "scripts": {
+    "bgm": "node tools/generate-bgm-loop.cjs",
+    "build": "node build-game.cjs"
+  },
+  "devDependencies": {
+    "lamejs": "^1.2.1"
+  }
+}
