@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "bgm": "node tools/generate-bgm-loop.cjs",
-    "build": "node build-game.cjs"
+    "build": "node build-game.cjs",
+    "test": "node build-game.cjs && node test-game.cjs"
   },
   "devDependencies": {
     "lamejs": "^1.2.1"
