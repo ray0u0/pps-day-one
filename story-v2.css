@@ -542,3 +542,11 @@
 
 .appointment .dept-org,.appointment .appointment-tagline { text-align:left; max-width:420px; margin:10px auto 0; line-height:1.65; }
 .appointment .dept-org .label { display:block; margin-bottom:3px; }
+
+.facility-stamp{display:table;font-size:13px;font-weight:800;border:2px solid currentColor;border-radius:4px;padding:3px 7px;margin:0 0 8px}
+.facility-stamp.stamp-ready{color:#215c46;background:#e2f0e3}
+.facility-stamp.stamp-followup{color:#843e2c;background:#fae9dd}
+.ending-facility.tier-ok{border-color:#77a089}
+.ending-facility:is(.tier-mid,.tier-weak,.tier-fail){border-color:#c39480}
+.ending-summary{padding:12px 16px;margin:12px 0 0;background:#eef2e7;border-radius:6px;line-height:1.6}
+.ending-summary strong{margin-right:8px}

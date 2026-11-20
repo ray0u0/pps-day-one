@@ -46,7 +46,7 @@ function toastWin(t){toast(t);const el=document.querySelector('.toast');if(el)el
 function parseGrade(title,effect){if(effect?.miniGrade)return effect.miniGrade;const m=String(title).match(/^([SAB])\s*·/);if(m)return m[1];if(/\b3\/3\b/.test(title))return 'S';if(/타임오버/.test(title))return 'F';return ''}
 function gradeCaption(g,effect){if(!g)return'';if(effect?.miniGrade)return ({S:'한 번에 맞춤',A:'한 번 더해서',B:'힌트 참고',F:'동료가 마무리'})[g]||'';return ({S:'완벽',A:'굿',B:'통과',F:'패널티'})[g]||''}
 const MINI_TAG={kit:'예산 맞추기',inspect:'라벨 맞추기',route:'경로 그리기',test:'현장 시험 2종',path:'동선 10칸',order:'예약 버튼 배치'};
-function deptSceneTitle(step){if(!s)return TITLES[step];const p=deptProf(),k=DEPTS[s.dept].kind;return[p.introTitle,p.fieldTitle,miniTitle(k),`점심 · ${DEPTS[s.dept].perk}`,s.dept===2?'제한 시간 14일':DEPT_STORIES[s.dept][0],'돌발 기상',p.routeTitle,'마지막 점검','개학 전 밤','마지막 장면'][step]||TITLES[step]}
+function deptSceneTitle(step){if(!s)return TITLES[step];const p=deptProf(),k=DEPTS[s.dept].kind;return[p.introTitle,p.fieldTitle,miniTitle(k),'점심 시간',s.dept===2?'제한 시간 14일':DEPT_STORIES[s.dept][0],(s.dept===5?'홈페이지에 남은 예전 일정':DEPT_WEATHER[s.dept][0]),p.routeTitle,'마지막 점검','개학 전 밤','마지막 장면'][step]||TITLES[step]}
 function deptSceneKind(step){if(!s)return KINDS[step];const mini=MINI_TAG[DEPTS[s.dept].kind];const work=['설치 체크','라벨 보류','비축 배분','시험 일정','면적 배치','문의 분류'];return['첫 업무','현장 답사',mini,'휴식',work[s.dept]||'핵심 업무','우선순위','창구 연결','프로젝트','야간 계획','마무리'][step]||KINDS[step]}
 const DEPT_GOALS=[['🎯 명세보다 교실 콘센트·설치 조건부터','🎯 전원·설치 얘기 나는 현장 탐색','🎯 운동장 안내 예산·물품 맞추기','🎯 점심 — 설비 위치 또 바뀜','🎯 설치 체크 3항목 고르기','🎯 도착했는데 현장 조건 안 맞을 때','🎯 물품·견적 문의 창구 연결','🎯 전원·설치 쪽 손볼 일','🎯 개학 전 밤 · 설치·물품 순서','🎯 마무리 영상 컷'],['🎯 라벨·현물부터 출동','🎯 납품 샘플·검수 참고 현장','🎯 HS 라벨 맞추기','🎯 점심 — 라벨 사진부터','🎯 틀린 라벨 상자 보류 표시','🎯 검사 일정 밀림 — 어디부터','🎯 품질·인증 창구 연결','🎯 재검수·추적 프로젝트','🎯 개학 전 밤 · 검수 순서','🎯 마무리 영상 컷'],['🎯 긴급 물량·우회 통화','🎯 항구·우회 물류 현장 (★)','🎯 침수 피해 경로 잇기','🎯 점심 — 배분 표 얘기','🎯 14일 안 물량 85+15 배분','🎯 다리 통제 — 창고 물량','🎯 비축·공급 창구 연결','🎯 공장·학교 물량 프로젝트','🎯 개학 전 밤 · 물량·일정','🎯 마무리 영상 컷'],['🎯 복도에서 깨지는 시범품','🎯 시험·센서 현장 (★ 실험실)','🎯 현장 시험 두 가지 고르기','🎯 점심 — 과제 서류','🎯 복도 시험 조건 2개 담기','🎯 시험 일정 꼬임','🎯 혁신·시범구매 창구','🎯 시범·재시험 프로젝트','🎯 개학 전 밤 · 시험 순서','🎯 마무리 영상 컷'],['🎯 출입·동선 먼저 걸어보기','🎯 문화관 동선 답사 (★)','🎯 홀까지 10칸 동선','🎯 점심 — 가는 길도 검토','🎯 대기 면적 60㎡ 배치','🎯 야외 공사 중단','🎯 시설·설계 창구','🎯 동선·문턱 프로젝트','🎯 개학 전 밤 · 통로 우선','🎯 마무리 영상 컷'],['🎯 예약 화면 막힘 전화','🎯 UI·안내 현장 (★ 문화관)','🎯 화면 수정 순서','🎯 점심 — 메뉴얼 PDF','🎯 문의 3건 처리 단계 배치','🎯 공지 vs 현장 일정','🎯 정보화·용역 창구','🎯 UX·포털 프로젝트','🎯 개학 전 밤 · 시스템·사람','🎯 마무리 영상 컷']];
 function sceneGoal(step){if(!s)return SCENE_SUMMARIES[step];const g=DEPT_GOALS[s.dept];if(step===8)return `🎯 ${g[8]} · 예산 ${opBudget()}`;return g?.[step]||SCENE_SUMMARIES[step]}
@@ -181,7 +181,7 @@ function miniGrade(){if(s.local.tool)return '힌트 보고 맞췄어요';if(s.lo
 function miniResultTitle(kind,assisted){if(assisted)return kind==='order'?'예약 화면을 함께 정리했어요':'동료가 대신 마무리';return {kit:'운동장 안내 물품',inspect:'납품 라벨 확인',route:'우회 물량 경로',test:'현장 시험 조건',path:'홀까지 가는 길',order:'예약 바로가기 배치'}[kind]||'확인 완료'}
 function miniResultText(kind,assisted,box){if(assisted)return {kit:'예산 안에서 물품을 맞추는 건 동료가 이어서 했어요.',inspect:'라벨 확인은 동료가 마무리했어요. 이상이 있던 건 따로 표시했습니다.',route:'우회 경로는 동료가 그려 넣었어요.',test:'시험 조건은 동료가 정리했어요.',path:'동선은 동료가 이어 그렸어요. 오늘은 대략 잇는 것만 확인했습니다.',order:'도현과 함께 예약 버튼을 첫 화면으로 옮겼어요. 이용자가 메뉴를 헤매지 않고 바로 예약할 수 있게 됐습니다.'}[kind]||'동료가 마무리했습니다.';return {kit:'운동장 안내에 쓸 물품을 예산 안에 맞췄습니다.',inspect:`${box}번 상자 라벨이 계약과 달라 보입니다. 납품 전에 다시 확인하기로 했습니다.`,route:'침수 구간을 피해 창고에서 공장까지 물량 경로를 잇었습니다.',test:'복도 문제를 재현할 시험 두 가지를 골라, 현장 시험 일정에 넣었습니다.',path:'기둥 사이를 피해 입구에서 홀까지 길을 잇었습니다. 휠체어·유모차가 지나갈 만한지 내일 현장에서 다시 걸어볼게요.',order:'예약 버튼을 첫 화면에 배치했어요. 이제 이용자가 메뉴를 여러 번 열지 않고 바로 예약할 수 있어요. 문화관 이용 준비에도 도움이 됐습니다.'}[kind]||'확인했습니다.'}
 function departmentForMini(){return s.dept}
-function stats(){return `<div class="meters meter-panel"><div title="일이 겹치면 줄어요. 점심·쉬면 회복"><span>${METER_ENERGY}</span><b>${'●'.repeat(Math.ceil(s.energy/2))}<i>${'○'.repeat(5-Math.ceil(s.energy/2))}</i></b><small>${s.energy}/10</small></div><div title="협업·연결이 쌓일수록 일부 선택지가 열려요"><span>${METER_TRUST}</span><b>${s.trust}<small> / 8</small></b></div><p class="fine meter-legend">메인은 <b>시설 준비도</b>(학교·산업단지·문화관)입니다.</p></div>`}
+function stats(){return `<div class="meters meter-panel"><div title="일이 겹치면 줄어요. 점심·쉬면 회복"><span>${METER_ENERGY}</span><b>${'●'.repeat(Math.ceil(s.energy/2))}<i>${'○'.repeat(5-Math.ceil(s.energy/2))}</i></b><small>${s.energy}/10</small></div><div title="협업·연결이 쌓일수록 일부 선택지가 열려요"><span>${METER_TRUST}</span><b>${s.trust}<small> / 8</small></b></div></div>`}
 function shell(content){
  interactionHTML=content;
  const isResult=s.phase==='result',entry=s.log.at(-1);
@@ -263,7 +263,7 @@ const DEPT_STORIES=[
  ['제한 시간 14일','산업단지 두 곳에서 원자재 지원 요청이 들어왔어요. 남은 기한은 14일이고, 급한 정도는 현장마다 달라요.',['각 현장 재고랑 필요한 날짜를 확인한다','동료랑 공급 일정 대안을 얘기한다','당장 쓸 양이랑 나중 수요를 나눠 본다'],['3일 소요 · 두 현장 재고·납기일 확인','5일 소요 · 공급 일정 대안 맞추기','2일 소요 · 급한 물량부터 배분']],
  ['실험실에선 됐는데','복도에선 센서 반응이 달라요. 다음 시험을 어떻게 할까요?',['이용자를 만나서 불편한 점을 듣는다','개발사랑 조건 바꿔 가며 원인을 찾는다','작은 구역에서 돌려보고 적어 둔다']],
  ['대기 공간 부족','문화관 도면에 대기 공간이 부족하대요. 예산도 같이 봐야 합니다.',['동선부터 따라가 본다','설계 담당자랑 비용·공간 대안을 비교한다','바쁜 시간대 이용 상황을 살펴본다']],
- ['예약 첫날, 같은 질문만','문화관 예약 화면에 똑같은 문의가 쏟아졌어요.',['사람들이 실제로 누르는 순서를 본다','담당자랑 요구사항을 다시 정리한다','작은 화면 수정안을 같이 써 봤다']]
+ ['문화관 예약 문의','문화관 예약 화면에 똑같은 문의가 쏟아졌어요.',['사람들이 실제로 누르는 순서를 본다','담당자랑 요구사항을 다시 정리한다','작은 화면 수정안을 같이 써 봤다']]
 ];
 const DEPT_CHOICE_SUB=['현장을 깊게 본다','동료와 맞춰 본다','작게 시험하고 적는다'];
 const DEPT_CHOICE_SUB_BY_DEPT={0:['설치 조건·전원부터 확인','설치팀이랑 역할 나누기','짧게 달아보고 반응 체크'],1:['현물·목록 하나씩 대조','담당자랑 라벨 차이 확인','확실한 것만 먼저 표시'],2:['재고·납기일 맞추기','공급 일정 대안','급한 물량부터 나누기'],3:['이용자 불편 듣기','개발사랑 조건 바꿔 보기','작은 구역 시험'],4:['동선 따라가기','비용·공간 대안 비교','바쁜 시간대 관찰'],5:['사람들이 누르는 순서 보기','요구사항 다시 정리','작은 화면 수정안']};
@@ -390,7 +390,7 @@ function miniIntro(k){return {kit:'운동장에 보낼 물건을 예산 안에�
 function miniFailRules(){return s.local.tries?s.local.tries<2?'<p class="hint">한 번 더 시도할 수 있어요. 두 번째 실패 시 동료가 마무리합니다.</p>':'':''}
 function miniHintBtn(){return s.local.tries?`<button class="log-btn" onclick="puzzleHint()">다시 시도 — 정답 힌트 보기</button>`:''}
 function mini(){const d=DEPTS[departmentForMini()];const partner=s.step===4&&s.dept===s.first;let content='';if(d.kind==='kit')content=kit();if(d.kind==='inspect')content=inspect();if(d.kind==='route')content=route();if(d.kind==='test')content=testLab();if(d.kind==='path')content=pathGame();if(d.kind==='order')content=orderGame();const bodyCls=d.kind==='test'?'paper-body paper-body-test':'';shell(title(partner?'협업 퍼즐':`${MINI_TAG[d.kind]}`,miniTitle(d.kind),partner?'옆 부서 부탁':'현장 조건을 확인하고 직접 해결해 보세요.')+`<div class="${bodyCls||'paper-body'}"><p class="puzzle-goal puzzle-goal-prominent">${miniIntro(d.kind)}</p>${content}${s.local.feedback?`<div class="feedback puzzle-feedback" role="status">${s.local.feedback}</div>`:''}${miniFailRules()}${miniHintBtn()}${s.local.tries>=2?'<button class="btn outline small" onclick="teamFinish()">동료 합동 마무리 →</button>':''}</div>`)}
-function miniTitle(k){return {kit:'운동장 안내 준비',inspect:'상자 라벨이 하나 이상해요',route:'다리가 잠기기 전에',test:'실험실 OK, 복도에서 문제',path:'이 길로 들어갈 수 있을까요',order:'예약 버튼을 찾기 쉽게'}[k]}
+function miniTitle(k){return {kit:'운동장 안내 준비',inspect:'상자 라벨이 하나 이상해요',route:'침수를 피해 공장까지',test:'복도에서 센서 다시 시험하기',path:'이 길로 들어갈 수 있을까요',order:'예약 버튼을 찾기 쉽게'}[k]}
 const SUPPLIES=[{name:'방수 덮개',cost:2,tags:['비'],icon:'☂'},{name:'보조 전원',cost:3,tags:['전원'],icon:'ϟ'},{name:'안내 스피커',cost:2,tags:['안내'],icon:'◖'},{name:'대형 화면',cost:5,tags:['안내'],icon:'▣'},{name:'장식 조명',cost:2,tags:['장식'],icon:'✧'},{name:'다기능 안내함',cost:4,tags:['안내','비'],icon:'▤'}];
 function kit(){const items=s.local.pick.map(i=>SUPPLIES[i]),cost=items.reduce((a,b)=>a+b.cost,0);return `${talk(2,'개학 안내를 운동장에서 한대요. 비를 막을 덮개, 전원, 안내 방송이 필요해요. 예산 7 안에서 세 가지를 모두 챙겨 볼까요?')}<div class="puzzle-hud"><span>예산 <b>${cost}/7</b></span><span>품목 <b>${items.length}/3</b></span><span>${['비','전원','안내'].map(x=>`<i class="need ${items.some(v=>v.tags.includes(x))?'met':''}">${x}</i>`).join('')}</span></div>${pixelKitPreview()}<div class="supply-grid">${SUPPLIES.map((x,i)=>{const sel=s.local.pick.includes(i),over=!sel&&cost+SUPPLIES[i].cost>7;return `<button class="supply ${sel?'selected':''}" aria-pressed="${sel}" onclick="pick(${i},3,7)" ${over?'disabled':''}><b>${pixelIcon(['cover','power','speaker','screen','light','building'][i])}</b><strong>${SUPPLIES[i].name}</strong><small>${SUPPLIES[i].tags.join(' · ')} · ${SUPPLIES[i].cost}</small></button>`}).join('')}</div><button class="btn full" onclick="checkMini()">이렇게 보내기 →</button><p class="hint">이야기용 예산이에요. 실제 조달 절차와는 다릅니다.</p>`}
 const BOXES=[{label:'A',model:'HS-20',limit:'정상',detail:'모델 HS-20 · 방수 패킹 있음 · 시험 대상 HS-20'}, {label:'B',model:'HS-20',limit:'정상',detail:'모델 HS-20 · 방수 패킹 있음 · 시험 대상 HS-20'}, {label:'C',model:'HS-20',limit:'확인 필요',detail:'모델 HS-20 · 방수 패킹 있음 · 시험 대상 HS-10'}, {label:'D',model:'HS-20',limit:'정상',detail:'모델 HS-20 · 방수 패킹 있음 · 시험 대상 HS-20'}];
@@ -449,9 +449,9 @@ function pathPointerUp(e){if(e?.pointerId!==undefined&&pathDragId!==null&&e.poin
 function orderPick(i){if(!isMini()||DEPTS[s.dept].kind!=='order')return;const picks=s.local.order;if(i>=3)s.local.order=picks.filter(n=>n<3).concat(i);else if(picks.includes(i))s.local.order=picks.filter(n=>n!==i);else picks.push(i);save();play();beep()}
 function resetPuzzle(){s.local.pick=[];s.local.path=[0];s.local.order=[];s.local.feedback='';save();play()}
 function miniCheck(){const k=DEPTS[departmentForMini()].kind,l=s.local;if(k==='kit'){const x=l.pick.map(i=>SUPPLIES[i]);return x.length<=3&&x.reduce((a,b)=>a+b.cost,0)<=7&&['비','전원','안내'].every(tag=>x.some(v=>v.tags.includes(tag)))}if(k==='inspect')return l.selected===badBox();if(k==='route')return l.path.at(-1)===ROUTE_PUZZLE.goal&&l.path.length<=ROUTE_PUZZLE.maxLen;if(k==='test')return l.pick.length===2&&l.pick.includes(0)&&l.pick.includes(2);if(k==='path')return l.path.at(-1)===planGoal()&&l.path.length<=PLAN_PUZZLE.maxLen;if(k==='order')return l.order.length===3&&[0,1,3].every(i=>l.order.includes(i));return false}
-function checkMini(){if(!isMini())return;if(miniCheck()){const g=miniGrade();s.local.feedback=`✓ ${g}`;if(miniGradeCode()==='S')toastWin(g);else toast(g);save();return completeMini(false)};const id=departmentForMini(),k=DEPTS[id].kind;const reasons={kit:'예산 7 · 비·전원·안내 태그',inspect:'HS-10 라벨 찾기',route:'침수 피해 공장까지',test:'어두운 복도 + 짐 든 사람',path:'10칸 이내 입구→홀 · 기둥 회피',order:'지난 공지와 행사 사진을 접고, 첫 화면에 예약 버튼을 배치해 보세요.'};s.local.tries++;if(s.local.tries<2){s.local.feedback=`✕ ${reasons[k]} — 한 번 더!`;save();play();beep();return}if(k==='order')return completeMini(true);finish('동료와 다시 점검했어요',reasons[k]+' · 동료 합동 마무리.',{energy:-2,trust:-1,flag:'rework'},DEPTS[id].source)}
+function checkMini(){if(!isMini())return;if(miniCheck()){const g=miniGrade();s.local.feedback=`✓ ${g}`;if(miniGradeCode()==='S')toastWin(g);else toast(g);save();return completeMini(false)};const id=departmentForMini(),k=DEPTS[id].kind;const reasons={kit:'예산 7 · 비·전원·안내 태그',inspect:'HS-10 라벨 찾기',route:'침수 피해 공장까지',test:'어두운 복도 + 짐 든 사람',path:'10칸 이내 입구→홀 · 기둥 회피',order:s.local.order.includes(2)?'이용 안내도 접혀 있어요. ‘이용 안내 다시 보이기’를 눌러 주세요.':'지난 공지와 행사 사진만 접고, 첫 화면에 예약 버튼을 배치해 주세요.'};s.local.tries++;if(s.local.tries<2){s.local.feedback=`✕ ${reasons[k]} — 한 번 더!`;save();play();beep();return}if(k==='order')return completeMini(true);finish('동료와 다시 점검했어요',reasons[k]+' · 동료 합동 마무리.',{energy:-2,trust:-1,flag:'rework'},DEPTS[id].source)}
 
-function puzzleHint(){if(!isMini())return;const k=DEPTS[departmentForMini()].kind;const hints={kit:'보조 전원이랑 다기능 안내함 같이 고르면, 비·전원·안내를 7 안에 맞출 수 있어요.',inspect:`${'ABCD'[badBox()]}번 상자 라벨을 다시 봐요. 시험 대상 모델이 달라요.`,route:'창고에서 오른쪽으로 두 칸 간 뒤 아래쪽 길을 살펴보세요.',test:'어두운 복도랑 짐 든 사람, 이 둘 골라 보세요.',path:'기둥 띠를 위나 아래로 우회해 홀까지 이으면 됩니다. 10칸 안이면 OK.',order:'지난 공지와 행사 사진을 접고, 첫 화면에 예약 버튼을 놓아 보세요.'};s.local.tool=true;s.local.feedback=hints[k];save();play()}
+function puzzleHint(){if(!isMini())return;const k=DEPTS[departmentForMini()].kind;const hints={kit:'보조 전원이랑 다기능 안내함 같이 고르면, 비·전원·안내를 7 안에 맞출 수 있어요.',inspect:`${'ABCD'[badBox()]}번 상자 라벨을 다시 봐요. 시험 대상 모델이 달라요.`,route:'창고에서 오른쪽으로 두 칸 간 뒤 아래쪽 길을 살펴보세요.',test:'어두운 복도랑 짐 든 사람, 이 둘 골라 보세요.',path:'기둥 띠를 위나 아래로 우회해 홀까지 이으면 됩니다. 10칸 안이면 OK.',order:'지난 공지와 행사 사진만 접으세요. 이용 안내는 남기고 예약 버튼은 첫 화면에 놓으세요.'};s.local.tool=true;s.local.feedback=hints[k];save();play()}
 function teamFinish(){if(!isMini()||s.local.tries<2)return;completeMini(true)}
 const DEPT_HANDOFFS=[
  '운동장에 보낼 장비 목록을 납품검사과에 넘겼어요.',
@@ -486,8 +486,45 @@ function noticeCrisis(){
  '<div class="paper-body">'+talk(0,deptProf().crisisLead)+webMock('모아문화관 홈페이지',['개관 안내 · 변경 전 일정','예약 확인'])+
  '<div class="choice-stack">'+NOTICE_RESPONSES.map((o,i)=>choice(o.label,o.hint,'crisisChoice('+i+')')).join('')+'</div></div>');
 }
-function crisis(){if(s.dept===5)return noticeCrisis();const p=deptProf(),covered=s.flags.rain||s.flags.harbor,daysLeft=30-DAYS[s.step],forecast=s.weather===0?'하천 범람 · 다리 통제':'폭우 · 설치·배송 지연';shell(title(deptChip(DEPTS[s.dept]),'돌발 기상',`D-${daysLeft} · 우선순위 하나`)+`<div class="paper-body"><p class="puzzle-goal">${forecast}</p>${talk(0,npcLine(p.crisisLead))}<div class="choice-stack">${choice(p.crisisOpts[0],covered?'학교·공장 동시 대응':'🔒 현장 답사에서 학교 또는 항구를 확인했을 때',"crisisChoice(0)",!covered)}${choice(p.crisisOpts[1],hasReserveStock()||s.trust>=4?'공장 쪽 물량·일정 먼저':'🔒 비축 여유 또는 동료 도움 4',"crisisChoice(1)",!hasReserveStock()&&s.trust<4)}${choice(p.crisisOpts[2],'학교 일정부터 공지',"crisisChoice(2)")}</div></div>`)}
-function crisisChoice(i){if(s.phase!=='play'||s.step!==5)return;if(s.dept===5){const o=NOTICE_RESPONSES[i];if(o)finish(o.title,o.text,{city:[0,0,o.city],energy:o.energy},5);return}if(i===0&&!(s.flags.rain||s.flags.harbor))return;if(i===1&&!hasReserveStock()&&s.trust<4)return;const o=[['우회로 동시 대응','공장행 트럭은 우회로로 보냈고, 학교 장비는 비를 피할 수 있는 곳으로 옮겼어요. 문화관도 준비를 계속할 수 있었지만, 세 곳을 동시에 맡느라 남은 힘이 줄었어요.',{city:[1,1,1],energy:-2,flag:'resilient'}],['공장 우선 공급','공장 쪽 물량을 먼저 맞췄습니다. 학교·문화관 일정은 뒤로 밀렸습니다.',{city:[0,3,0],trust:-1,flag:'resilient'}],['학교 우선 공지','학교 일정부터 공지했습니다. 공장·문화관은 다음 주로 미뤘습니다.',{city:[3,0,0],energy:1,flag:'phased'}]][i];if(o)finish(o[0],o[1],o[2],2)}
+const DEPT_WEATHER=[
+ ['비를 피할 설치 장소 찾기','운동장의 안내 장비가 비를 맞을 수 있어요. 장비를 어디서부터 쓸 수 있게 할까요?',
+  ['학교와 공장의 설치 장소 확인','두 현장 담당자와 실내 설치 위치를 확인해 장비가 도착하면 바로 설치할 수 있게 했어요.'],
+  ['공장 장비부터 설치팀과 조율','공장에 설치팀을 먼저 보냈어요. 학교 장비는 다음 가능한 시간을 잡았습니다.'],
+  ['학교 방송 장비를 실내로 옮기기','학교는 현관 안쪽에서 안내 방송을 할 수 있게 됐어요. 공장 설치는 다음 일정으로 남겼습니다.']],
+ ['검사 장소 다시 잡기','비 때문에 야외에서 물품을 검사하기 어려워졌어요. 어디부터 검사할까요?',
+  ['두 현장의 실내 검사 장소 확보','학교와 공장에서 비를 피할 장소를 찾아 검사를 이어 갔어요.'],
+  ['공장에 도착한 물품부터 검사','검사 인력을 공장에 먼저 보내 도착한 물품을 확인했어요.'],
+  ['학교 물품부터 실내에서 검사','학교 담당자와 장소를 맞춰 물품을 검사했어요. 공장 검사는 다음 일정에 잡았습니다.']],
+ ['물량을 보낼 길 다시 찾기','비로 운송로가 막혔어요. 남은 물량을 어디부터 보낼까요?',
+  ['확인해 둔 우회도로로 두 곳에 배송','운송 담당자와 우회도로를 확인해 학교와 공장에 물량을 보냈어요.'],
+  ['창고 물량을 공장에 먼저 공급','창고 물량과 운송 일정을 맞춰 공장에 먼저 보냈어요.'],
+  ['학교 물품부터 배송 일정 잡기','개학에 필요한 학교 물품부터 배송 일정을 잡았어요. 공장 물량은 다음 차편을 확인합니다.']],
+ ['현장 시험 일정 조정','비 때문에 예정된 시험 장소를 쓰기 어려워졌어요. 어디부터 다시 시험할까요?',
+  ['학교와 공장에서 실내 시험 진행','현장 메모를 보고 실제 사용 조건과 비슷한 실내 장소를 찾아 두 곳의 시험을 이어 갔어요.'],
+  ['공장 센서를 먼저 시험','공장 담당자와 시간을 맞춰 센서가 작업 환경에서 제대로 반응하는지 확인했어요.'],
+  ['학교 복도에서 안내 장비 시험','학교 복도에서 조명과 통행 조건을 바꿔 시험했어요. 공장 시험은 다음 일정에 잡았습니다.']],
+ ['비 오는 날의 출입 동선','비 때문에 바깥 통로가 막혔어요. 사람들이 안전하게 오갈 길을 어디부터 확인할까요?',
+  ['학교와 공장의 우회 동선 확인','답사 때 남긴 메모를 꺼내 학교와 공장에서 이용할 수 있는 우회 통로를 확인했어요.'],
+  ['공장 실내 통로부터 확인','작업자와 함께 공장 통로를 걸어 보고 출입 안내를 바꿨어요.'],
+  ['학교 대체 출입구 안내','학생과 보호자가 들어올 수 있는 다른 출입구를 확인하고 학교에 알렸어요.']]
+];
+function crisis(){
+ if(s.dept===5)return noticeCrisis();
+ const [heading,lead,...actions]=DEPT_WEATHER[s.dept];
+ const covered=s.flags.rain||s.flags.harbor,help=hasReserveStock()||s.trust>=4;
+ const hints=[covered?'학교·공장 준비 개선 · 남은 힘 −2':'학교 우천 메모 또는 우회 연락처 필요',help?'공장 준비 개선 · 동료 도움 −1':'비축 물량 또는 동료 도움 4 필요','학교 준비 개선 · 남은 힘 +1'];
+ shell(title(deptChip(DEPTS[s.dept]),heading,'비로 바뀐 현장 일정')+
+  '<div class="paper-body">'+talk(0,lead)+'<div class="choice-stack">'+actions.map(([label],i)=>choice(label,hints[i],'crisisChoice('+i+')',i===0&&!covered||i===1&&!help)).join('')+'</div></div>');
+}
+function crisisChoice(i){
+ if(s.phase!=='play'||s.step!==5)return;
+ if(s.dept===5){const o=NOTICE_RESPONSES[i];if(o)finish(o.title,o.text,{city:[0,0,o.city],energy:o.energy},5);return}
+ if(i===0&&!(s.flags.rain||s.flags.harbor))return;
+ if(i===1&&!hasReserveStock()&&s.trust<4)return;
+ const action=DEPT_WEATHER[s.dept][i+2];
+ const effect=[{city:[2,1,0],energy:-2,flag:'resilient'},{city:[0,3,0],trust:-1,flag:'resilient'},{city:[3,0,0],energy:1,flag:'phased'}][i];
+ if(action&&effect)finish(action[0],action[1],effect,DEPTS[s.dept].source);
+}
 const DESKS=['벤처나라·판로 안내','공공조달 길잡이 상담','해외조달시장 진출 지원'];
 const DESK_SHORT=['① 나라장터·벤처','② 길잡이·상담 예약','③ 해외·G-PASS'];
 const DESK_NOTE=['스타트업·벤처 등록·공공 쇼핑몰','조달 절차·상담 예약·제도 안내','G-PASS·해외 공공시장'];
@@ -544,10 +581,16 @@ function endingFacilitiesHtml(){
   const score=s.city[i],passed=score>=CITY_OK,grade=score>=8?'S':score>=7?'A':passed?'B':score>=CITY_MID?'C':'D';
   const followup=[SCHOOL_FOLLOWUP[s.first],['일부 생산라인부터 가동','먼저 도착한 원자재로 일부 라인부터 돌렸어요. 나머지 물량은 공급 일정을 다시 확인합니다.'],['일부 공간부터 운영','준비가 끝난 공간부터 열었어요. 나머지 공간은 점검을 마친 뒤 이용할 수 있도록 안내했습니다.']][i];
   const verdict=passed?events[i]+' 준비 완료':followup[0];
-  return '<article class="ending-facility '+cityTier(score).class+'">'+facilityPixelScene(i,score)+'<div class="facility-result-copy"><h2>'+name+'</h2><strong>'+verdict+'</strong><p>준비도 '+score+'/8 · 등급 '+grade+'</p><p>'+(passed?facilityOutcome(i).detail:followup[1])+'</p></div></article>';
+  return '<article class="ending-facility '+cityTier(score).class+'">'+facilityPixelScene(i,score)+'<div class="facility-result-copy"><h2>'+name+'</h2><span class="facility-stamp '+(passed?'stamp-ready':'stamp-followup')+'">'+(passed?'✓ 준비 완료':'! 보완 필요')+'</span><strong>'+verdict+'</strong><p>준비도 '+score+'/8 · 등급 '+grade+'</p><p>'+(passed?facilityOutcome(i).detail:followup[1])+'</p></div></article>';
  }).join('')+'</div>';
 }
 function deptRunPunch(){const k=DEPTS[s.first].kind;return {kit:'교실 전원·설치 조건을 맞추는 일이 많았습니다.',inspect:'납품 라벨·현물 확인이 이어졌습니다.',route:'비축 물량과 우회 공급이 공장 쪽으로 기울었습니다.',test:'현장 시험·시범 구매 조건을 맞췄습니다.',path:'출입·동선 불편을 걸어 확인했습니다.',order:'예약·안내 화면 연결을 살렸습니다.'}[k]||''}
+function endingSummary(){
+ const pending=CITY_SITES.filter((_,i)=>s.city[i]<CITY_OK);
+ if(!pending.length)return '세 현장 모두 예정된 준비를 마쳤어요.';
+ if(pending.length===3)return '세 현장 모두 보완할 일이 남았어요. 카드에서 이어서 할 일을 확인해 보세요.';
+ return pending.join('·')+'은 보완할 일이 남았고, 나머지 현장은 준비를 마쳤어요.';
+}
 function endingLead(){return '세 곳 중 '+s.city.filter(n=>n>=CITY_OK).length+'곳이 예정된 준비를 마쳤어요.'}
 function completeFinale(){
  s.log.push({step:9,day:30,dept:s.dept,title:'세 현장 결과',text:endingLead(),effect:{},source:11});
@@ -563,6 +606,7 @@ function ending(){
  $('app').innerHTML=`<section class="center wide-end screen screen-end">
   <header class="ending-heading"><span class="label">DAY 30</span><h1>세 현장 결과</h1><p>${esc(DEPTS[s.first].name)} · ${endingLead()}</p></header>
   ${endingFacilitiesHtml()}
+  <p class="ending-summary"><strong>한 줄 총평</strong> ${endingSummary()}</p>
   <div class="row ending-actions"><button class="btn" onclick="newGame()">다시 발령받기</button><button class="btn outline" onclick="downloadReport()">이야기 저장</button><button class="btn outline" onclick="showLog()">선택 다시 보기</button></div>
  </section>`;
 }
@@ -570,7 +614,7 @@ function downloadReport(){const text=`오늘부터 조달청 — 첫 발령, 그
 function goHome(){if(s&&!home)save();landing();window.scrollTo({top:0,behavior:'instant'})}
 function showLog(){pauseAuto();modal('내 선택이 만든 이야기',s?.log?.length?`<ul class="report-list">${s.log.map(e=>`<li><span class="chip">DAY ${e.day} · ${DEPTS[e.dept].name}</span><h3 style="font-size:17px;margin-top:10px">${e.title}</h3><p>${e.text}</p></li>`).join('')}</ul>`:'<p>첫 선택부터 이곳에 이야기가 쌓입니다.</p>')}
 function showSources(){pauseAuto();modal('조달청 탐험 노트',`<p>조직·업무·정책 안내를 바탕으로 소재를 구성했습니다. 사건과 인물, 부서의 협업 방식, 게임 규칙은 창작입니다.</p>${SOURCES.map(x=>`<div class="badge"><h3>${x.title}</h3><p>${x.fact}</p><a style="font-size:12px" href="${x.url}" target="_blank" rel="noopener noreferrer">공식 자료 읽기 ↗</a></div>`).join('')}<p class="fine">확인일: 2026.11.11. 공개 업무·정책 페이지 중심으로 조사했습니다. 사이트 전체나 비공개 자료를 수집했다는 의미가 아닙니다. 과거 연도 정책과 현재 절차는 구분해야 합니다.</p>`)}
-function showGuide(){pauseAuto();modal('플레이 안내',`<div class="badge"><h3>이 게임은</h3><p>조달청 <b>한 부서</b> 발령으로 업무 맥락을 짧게 체험하는 <b>비공식 소개용</b> 이야기입니다. 실제 절차·권한과 다릅니다.</p></div><div class="badge"><h3>시설 준비도 (메인)</h3><p>학교·산업단지·문화관 각 8점. <b>5점+</b> 준비 끝. 선택 칩에 +숫자가 보이면 여기에 쌓입니다.</p></div><div class="badge"><h3>힘 · 동료 도움 (보조)</h3><p><b>오늘 남은 힘</b>은 바쁨(일하면 줄고 점심에 회복). <b>동료 도움</b>은 협업(높으면 돌발·밤 업무 일부가 열림).</p></div><div class="badge"><h3>부서마다 다른 체험</h3><p>DAY 6 미니·DAY 9 점심·DAY 13 업무는 발령 부서마다 다릅니다. 다시 시작하면 다른 부서를 볼 수 있어요.</p></div><div class="badge"><h3>소리</h3><p>기본 <b>꺼짐</b>. 켜면 <b>이 게임에 넣은 짧은 배경 루프</b>(mp3)가 반복되고, 선택할 때 짧은 효과음.</p></div><p class="fine">자동 진행 · 로컬 저장 · 장면 끝에 조달청 탐험 노트</p><button class="btn full" onclick="closeModal()">시작할게요 →</button>`)}
+function showGuide(){pauseAuto();modal('플레이 안내',`<div class="badge"><h3>이 게임은</h3><p>조달청 <b>한 부서</b> 발령으로 업무 맥락을 짧게 체험하는 <b>비공식 소개용</b> 이야기입니다. 실제 절차·권한과 다릅니다.</p></div><div class="badge"><h3>현장별 준비도</h3><p>학교·산업단지·문화관 각 8점. <b>5점+</b> 준비 끝. 선택 칩에 +숫자가 보이면 여기에 쌓입니다.</p></div><div class="badge"><h3>힘 · 동료 도움 (보조)</h3><p><b>오늘 남은 힘</b>은 바쁨(일하면 줄고 점심에 회복). <b>동료 도움</b>은 협업(높으면 돌발·밤 업무 일부가 열림).</p></div><div class="badge"><h3>부서마다 다른 체험</h3><p>DAY 6 미니·DAY 9 점심·DAY 13 업무는 발령 부서마다 다릅니다. 다시 시작하면 다른 부서를 볼 수 있어요.</p></div><div class="badge"><h3>소리</h3><p>기본 <b>꺼짐</b>. 켜면 <b>이 게임에 넣은 짧은 배경 루프</b>(mp3)가 반복되고, 선택할 때 짧은 효과음.</p></div><p class="fine">자동 진행 · 로컬 저장 · 장면 끝에 조달청 탐험 노트</p><button class="btn full" onclick="closeModal()">시작할게요 →</button>`)}
 function showAbout(){pauseAuto();modal('첫 발령, 그다음 이야기',`<p>조달청 <b>한 부서</b> 발령으로 “무슨 기관인지”를 짧게 알아가는 비공식 체험 게임입니다. 실제 조달청 서비스가 아니며, 공무원의 실제 권한·인사·계약 절차를 재현하지 않습니다.</p><p>게임 화면·도시 그림·사건·프로그램은 새로 제작했습니다. 사용자가 제공한 조달청 로고와 나르미·달이 이미지를 HTML에 포함했습니다. 외부 파일을 불러오지 않고 실행되며 실시간 AI 연결이나 개인정보 전송은 없습니다. 배경은 제작한 짧은 mp3 루프를 HTML에 넣었고, 클릭 효과음은 Web Audio로 생성합니다. 외부 주소에서 음원을 불러오지 않습니다. 생성형 AI를 자료 정리와 기획·코딩 보조에 활용했습니다.</p><p>이번 버전은 반복 업무를 이야기·탐색·퍼즐·관계·선택으로 교체하고 한 시즌 한 부서로 진행합니다. 이전 부서 이동 화면에 저장된 기록도 자동으로 이어집니다. 구버전 저장 기록은 삭제하지 않으며 새 이야기의 저장 공간은 별도로 사용합니다.</p><button class="btn outline" onclick="closeModal();showSources()">공식 자료와 참고 범위 확인 →</button>`)}
 document.addEventListener('visibilitychange',()=>{if(!bgm||!sound)return;if(document.hidden)bgm.pause();else bgm.play().catch(()=>{})});
 document.addEventListener('pointerdown',onPathPointerDown);
