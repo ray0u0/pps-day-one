@@ -539,3 +539,6 @@
 .screen-end .ending-actions { justify-content:center; flex-wrap:wrap; gap:8px; margin-top:16px; }
 .screen-end .facility-result-copy { word-break:keep-all; overflow-wrap:anywhere; }
 @media(max-width:680px){.screen-end .ending-facility{display:grid;grid-template-columns:minmax(104px,36%) minmax(0,1fr);align-items:center}.screen-end .facility-result-copy{padding:10px}.screen-end .facility-result-copy h2{font-size:17px}}
+
+.appointment .dept-org,.appointment .appointment-tagline { text-align:left; max-width:420px; margin:10px auto 0; line-height:1.65; }
+.appointment .dept-org .label { display:block; margin-bottom:3px; }

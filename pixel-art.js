@@ -1,8 +1,21 @@
 /* Original code-drawn pixel artwork. No remote assets or font downloads. */
-function pixelIcon(kind, tone='#518b80') {
+function pixelIcon(kind, tone='#518b80', style) {
  const r=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
  const ink='#263f49',paper='#fff3cf',gold='#efb457';let art='';
- if(kind==='person')art=r(10,2,12,5,ink)+r(8,7,16,9,'#edbb91')+r(11,9,2,2,ink)+r(20,9,2,2,ink)+r(7,17,18,9,tone)+r(10,26,5,5,ink)+r(19,26,5,5,ink)+r(15,18,3,7,paper);
+ if(kind==='person'){
+  const hair=['#27343b','#603c32','#413439','#302f37','#573b37','#3b3030'][style]||ink;
+  const cuts=[
+   r(8,3,16,5,hair)+r(8,7,4,3,hair),
+   r(7,3,18,5,hair)+r(7,7,3,12,hair)+r(22,7,3,12,hair),
+   r(7,4,18,5,hair)+r(10,2,4,3,hair)+r(18,2,5,3,hair)+r(20,8,5,2,hair),
+   r(8,4,16,4,hair)+r(17,0,6,5,hair)+r(8,8,3,3,hair),
+   r(7,4,18,4,hair)+r(7,7,3,4,hair)+r(10,9,6,2,hair),
+   r(7,3,18,5,hair)+r(22,7,3,11,hair)+r(24,14,4,8,hair)
+  ];
+  art=r(8,7,16,9,'#edbb91')+(cuts[style]||r(10,2,12,5,ink))+r(11,11,2,2,ink)+r(20,11,2,2,ink)+
+   (style===4?r(9,10,6,1,ink)+r(17,10,7,1,ink)+r(14,11,4,1,ink):'')+
+   r(7,17,18,9,tone)+r(10,26,5,5,ink)+r(19,26,5,5,ink)+r(15,18,3,7,paper);
+ }
  else if(kind==='truck')art=r(2,9,18,13,tone)+r(20,13,10,9,gold)+r(22,14,5,4,paper)+r(5,22,6,6,ink)+r(22,22,6,6,ink)+r(7,24,2,2,paper)+r(24,24,2,2,paper);
  else if(kind==='water')art=[5,13,21].map((y,i)=>r(i%2?6:2,y,10,3,'#88d5e8')+r(i%2?20:16,y,10,3,'#88d5e8')).join('');
  else if(kind==='pillar')art=r(8,3,16,4,'#b1c1bf')+r(10,7,12,18,'#879fa4')+r(10,7,4,18,'#c6d6d2')+r(7,25,18,5,ink);
