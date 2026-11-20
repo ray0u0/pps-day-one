@@ -16,7 +16,7 @@ for(let d=0;d<6;d++){
  if(d===2)[1,2,7,12,13,14,19].forEach(walk);
  if(d===3)s.local.pick=[0,2];
  if(d===4)[6,12,18,24,25,26,27,28,29].forEach(walk);
- if(d===5)s.local.order=[0,1,2,3];
+ if(d===5)s.local.order=[0,1,3];
  assert.equal(miniCheck(),true,'solution for dept '+d);
  if(d===2||d===4)assert.ok((d===2?route():pathGame()).includes('도착!'));
  checkMini();assert.equal(s.phase,'result');assert.equal(s.log.at(-1).effect.miniGrade,'S');

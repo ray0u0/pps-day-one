@@ -41,10 +41,22 @@ function facilityPixelScene(site,score){
   const x=14+i*24,y=i%2?86:77;
   return '<g transform="translate('+x+' '+y+') scale(.45)">'+pixelIcon('person',['#427d72','#b36549','#637eaa'][i%3])+'</g>';
  }).join('');
- const feature=site===1?rect(116,12,11,30,roof):site===0?rect(73,11,3,16,roof)+rect(76,11,14,8,'#ea9b59'):rect(65,21,32,6,'#d7b668');
+ const door=open?'#ffe5a3':'#596e71';
+ const school=rect(18,32,124,42,wall)+rect(14,29,132,7,roof)+rect(57,23,46,9,roof)+
+  rect(73,9,3,18,roof)+rect(76,9,15,9,'#ea9b59')+windows+rect(70,59,20,15,door)+
+  rect(125,79,24,2,'#f7f1d6')+rect(128,72,2,9,'#f7f1d6')+rect(145,72,2,9,'#f7f1d6');
+ const factory=rect(15,41,130,34,wall)+rect(112,12,12,37,roof)+rect(109,11,18,5,'#324c5b')+
+  '<path d="M13 41l29-17v17l29-17v17l29-17v17h47v6H13z" fill="#426577"/>'+
+  rect(25,50,48,9,open?'#ffe5a3':'#6c8b91')+rect(94,51,32,24,door)+
+  [54,59,64,69].map(y=>rect(94,y,32,1,'#657b79')).join('')+
+  (open?'<g transform="translate(115 77) scale(.8)">'+pixelIcon('truck')+'</g>':'');
+ const theater=rect(19,35,122,42,wall)+rect(13,29,134,7,roof)+rect(27,23,106,7,roof)+
+  rect(47,36,66,9,'#305a50')+rect(53,40,54,2,open?'#ffe5a3':'#8ca8a0')+
+  [27,42,110,125].map(x=>rect(x,46,5,28,'#f6ecd0')).join('')+
+  rect(57,49,46,25,'#344f51')+rect(62,54,16,20,door)+rect(82,54,16,20,door)+
+  rect(46,74,68,4,'#bcb28e')+rect(39,78,82,4,'#e4d5ac');
  return '<svg class="facility-pixel-scene" viewBox="0 0 160 108" aria-hidden="true" shape-rendering="crispEdges">'+
   rect(0,0,160,108,open?'#c3e5e3':'#b5c6cb')+rect(0,66,160,42,open?'#8db281':'#8d9f93')+
-  rect(0,89,160,14,'#b9ad92')+rect(18,32,124,42,wall)+feature+
-  rect(14,30,132,8,roof)+rect(21,25,118,5,roof)+windows+
-  rect(71,59,18,15,open?'#eac781':'#596e71')+rect(0,103,160,5,'#688876')+crowd+'</svg>';
+  rect(0,89,160,14,'#b9ad92')+[school,factory,theater][site]+
+  rect(0,103,160,5,'#688876')+crowd+'</svg>';
 }
