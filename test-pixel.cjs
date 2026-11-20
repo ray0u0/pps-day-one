@@ -43,7 +43,7 @@ for(const [piece,bin] of [[0,0],[1,0],[2,1],[3,1],[4,2],[5,2],[6,2],[7,2]]){pick
 assert.equal(stockOk(),true);submitStock();assert.equal(s.flags.stockReady,false);
 for(let run=0;run<60;run++){
  start(run%6,0);s.log=[];autoMode=true;
- let ticks=0;while(s.phase!=='end'&&ticks++<90){autoStep();save();assert.ok(valid(load()))}
+ let ticks=0;while(s.phase!=='end'&&ticks++<90){autoStep();if(!autoMode&&s.phase==='play'&&s.step===2){assert.equal(s.dept,1);assert.equal(s.log.length,2);openBox(badBox());selectBox(badBox());checkMini();autoMode=true}save();assert.ok(valid(load()))}
  assert.equal(s.phase,'end','automatic run '+run);assert.equal(s.log.length,10);completed++;
 }
 console.log('PASS: startup, 6 mini-games, route undo/blocked tiles, S/A/B grades, 18 lunch choices, '+completed+' full runs, save/restore.');

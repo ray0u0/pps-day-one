@@ -550,3 +550,25 @@
 .ending-facility:is(.tier-mid,.tier-weak,.tier-fail){border-color:#c39480}
 .ending-summary{padding:12px 16px;margin:12px 0 0;background:#eef2e7;border-radius:6px;line-height:1.6}
 .ending-summary strong{margin-right:8px}
+
+.play-site-scenes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.play-site-scenes figure{min-width:0;margin:0;overflow:hidden;border:1px solid #b9c8b7;border-radius:6px;background:#edf2e7}
+.play-site-scenes svg{width:100%;aspect-ratio:160/108;display:block}
+.play-site-scenes figcaption{padding:6px 4px;text-align:center;font-size:13px;font-weight:700;word-break:keep-all}
+@media(max-width:600px){.play-site-scenes{gap:5px}.play-site-scenes figcaption{font-size:12px}}
+
+.inspection-game .box-grid{gap:10px}
+.inspection-game .parcel{min-height:0;padding:10px 12px;gap:6px}
+.inspection-game .inspection-line{padding-bottom:4px}
+.inspection-game .inspection-line strong{font-size:23px}
+.inspection-card-top .pixel-icon{width:32px;height:32px}
+.inspection-game .inspection-unopened{margin:8px 0 2px}
+.inspection-game .inspection-contract{margin:8px 0 10px;padding:8px 12px}
+@media(min-width:960px){
+ .inspection-game .box-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .inspection-game .inspection-line{flex-direction:column;align-items:flex-start;gap:2px}
+}
+
+.call-results{display:grid;gap:8px;padding:0;margin:10px 0;list-style:none}
+.call-results li{display:grid;gap:4px;padding:8px 12px;border:1px solid #becbbb;border-radius:6px;background:#f4f6ef;font-size:14px;line-height:1.5}
+.call-results strong{font-size:15px}

@@ -26,6 +26,7 @@ function pixelIcon(kind, tone='#518b80', style) {
  else if(kind==='screen')art=r(2,4,28,20,ink)+r(5,7,22,14,tone)+r(14,24,4,4,ink)+r(9,28,14,3,ink)+r(8,10,10,2,paper);
  else if(kind==='light')art=r(10,3,12,5,gold)+r(6,8,20,9,gold)+r(10,17,12,5,gold)+r(12,22,8,5,ink)+r(14,27,4,3,ink);
  else if(kind==='moon')art=r(9,3,14,4,paper)+r(5,7,16,16,paper)+r(9,23,14,4,paper)+r(15,3,10,16,'#35576a');
+ else if(kind==='clipboard')art=r(5,4,22,27,'#896349')+r(8,7,16,21,paper)+r(11,2,10,6,ink)+r(17,12,5,2,tone)+r(17,19,5,2,tone)+r(10,24,12,2,tone)+'<path d="M10 13l2 2 4-4m-6 9 2 2 4-4" fill="none" stroke="#38765c" stroke-width="2"/>';
  else if(kind==='bag')art=r(10,3,12,5,ink)+r(6,8,20,22,tone)+r(10,18,12,9,gold)+r(8,10,3,7,paper);
  else art=r(4,10,24,20,tone)+r(2,7,28,4,ink)+r(9,15,4,5,paper)+r(19,15,4,5,paper)+r(14,23,5,7,ink);
  return `<svg class="pixel-icon" width="32" height="32" viewBox="0 0 32 32" shape-rendering="crispEdges" aria-hidden="true">${art}</svg>`;
