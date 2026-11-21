@@ -741,7 +741,7 @@ function showSources(){
   }).join('');
   return '<details class="source-group" '+(group===0?'open':'')+'><summary>'+name+'</summary><div class="source-grid">'+cards+'</div></details>';
  }).join('');
- modal('조달청 탐험 노트','<div class="source-notes"><p class="source-intro">게임에서 만난 업무와 제도를 조달청 자료에서 더 알아볼 수 있어요. 게임 속 사건과 퍼즐은 가상의 사례입니다.</p>'+sections+'</div>');
+ modal('조달청 노트','<div class="source-notes"><p class="source-intro">게임에서 만난 업무와 제도를 조달청 자료에서 더 알아볼 수 있어요. 게임 속 사건과 퍼즐은 가상의 사례입니다.</p>'+sections+'</div>');
 }
 function showGuide(){
  pauseAuto();
@@ -757,7 +757,7 @@ function showAbout(){
  modal('게임 소개',`<div class="help-notes">
  <section><h3>오늘부터 조달청</h3><p>조달청이 어떤 일을 하는 곳인지 웹에서 가볍게 알아보는 시뮬레이션이에요. 게임 속 여섯 부서 중 한 곳에 발령받아, 현장 요청을 확인하고 부서에 맞는 업무를 맡습니다.</p></section>
  <section><h3>선택이 바꾸는 세 현장</h3><p>물품 구매, 납품 검사, 비축물자 공급 등에서 착안한 일을 해보고, 내 선택이 학교·산업단지·문화관의 준비에 어떤 영향을 줬는지 확인할 수 있어요.</p></section>
- <section><h3>게임과 실제 업무</h3><p>조달청의 역할을 참고해 만든 비공식 창작 게임이에요. 사건과 퍼즐은 가상의 사례이며, 관련 공식 자료는 화면 맨 아래 ‘탐험 노트’에 모아 뒀어요.</p></section>
+ <section><h3>게임과 실제 업무</h3><p>조달청의 역할을 참고해 만든 비공식 창작 게임이에요. 사건과 퍼즐은 가상의 사례이며, 관련 공식 자료는 화면 맨 아래 ‘조달청 노트’에 모아 뒀어요.</p></section>
  </div>`);
 }
 document.addEventListener('visibilitychange',()=>{if(!bgm||!sound)return;if(document.hidden)bgm.pause();else bgm.play().catch(()=>{})});
