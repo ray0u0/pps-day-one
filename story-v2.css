@@ -602,3 +602,35 @@
 
 .screen-end .ending-facility{position:relative}
 .ending-facility .ending-celebration{inset:0 0 auto;height:100%;max-height:190px}
+
+.mobile-pack{display:none}
+.mobile-notes summary,.result-toolbag summary{cursor:pointer;font-size:14px;font-weight:700;padding:8px 0}
+.mobile-notes[open]>.clue-grid,.result-toolbag[open]>.clue-grid{display:grid;max-height:220px;overflow:auto;overscroll-behavior:contain}
+@media(max-width:700px){
+ .desktop-pack{display:none}
+ .mobile-pack{display:block}
+ .mobile-run-hud{padding:6px 10px;margin-bottom:6px}
+ .mobile-run-hud .meters{display:flex;flex-wrap:wrap;gap:3px 10px}
+ .mobile-run-hud .meters>div{padding:4px 0;gap:5px}
+}
+
+@media(max-width:700px){
+ .mobile-site-progress{margin:0 0 8px;padding:0 10px;border:1px solid #bdcbbb;border-radius:7px;background:#f3f6ed}
+ .mobile-site-progress .site-progress{margin:0 0 8px;padding:0;border:0}
+ .mobile-site-progress .site-progress h3{display:none}
+ .play-site-scenes{margin-bottom:8px}
+ .play-site-scenes svg{max-height:84px}
+ .compact-game .story-preview{padding:12px}
+ .compact-game .story-preview h2{margin-block:6px}
+ .compact-game .popup-hint,.compact-game .compact-status{display:none}
+ .compact-game .mobile-run-hud{margin-top:8px}
+ .compact-game .fixed-decisions .btn.full{min-height:44px;font-size:15px}
+ .event-dialog .event-foot button{min-height:44px}
+ .event-dialog .event-bar button{min-width:44px;min-height:44px}
+ .event-dialog .paper-header h2{margin-block:5px;font-size:22px}
+ .event-dialog .puzzle-goal-prominent{margin-block:0 8px}
+ .event-dialog .effect-chips,.story-preview .effect-chips{margin-block:8px}
+ .event-dialog .supply-grid.supply-grid-test{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .event-dialog .supply-grid-test .supply-test-card{min-height:0;padding:10px;gap:5px}
+ .event-dialog .supply-grid-test .supply-test-card .pixel-icon{width:34px;height:34px}
+}
