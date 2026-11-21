@@ -246,6 +246,14 @@
 
 
 
+
+
+
+
+
+
+
+
 /* STORY_V2 */
 .six{grid-template-columns:repeat(3,1fr)}.story-scene{border-radius:50px 8px 8px 8px;background:#dfe9dc;min-height:0}.story-scene svg{margin-top:30px}.hero-quote{padding:25px 32px 32px;background:#e9eddf}.hero-quote p{font-size:21px;font-weight:750;margin:10px 0}.hero h1{font-size:clamp(38px,3.8vw,54px);margin:16px 0}
 .hero .desc{font-size:15px;line-height:1.75}
@@ -826,6 +834,31 @@
 .plan-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:6px}
 .plan-preview>div{display:grid;gap:3px;background:#eef3e9;border-radius:6px;padding:8px;font-size:14px}
 .plan-preview small{color:#315b46}
+
+.stock-piece[data-stock-piece]{touch-action:none;user-select:none;cursor:grab}
+.stock-bin.stock-drop-target{outline:3px solid #397658;outline-offset:-3px;background:#dcebd5}
+.stock-drag-ghost{position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 4px 14px #263f4955}
+
+.event-dialog .event-foot{justify-content:flex-end;padding:4px 12px}
+@media(max-height:820px){
+ .event-dialog .paper-header{padding-block:10px 6px}
+ .event-dialog .paper-body{padding-block:8px 12px}
+ .event-dialog .dialogue{margin-block:6px 10px}
+ .event-dialog .choice-stack{margin-top:10px;gap:7px}
+ .event-dialog .story-choice{padding-block:10px}
+}
+.screen-end{position:relative}
+.ending-celebration{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}
+.ending-celebration i{position:absolute;left:var(--x);top:8px;width:8px;height:8px;background:var(--tone);opacity:0;animation:ending-pixels 1.3s var(--delay) ease-out both}
+@keyframes ending-pixels{
+ 0%{opacity:0;transform:translate(0,28px) scale(.5)}
+ 18%{opacity:1;transform:translate(var(--drift),0) scale(1)}
+ 100%{opacity:0;transform:translate(var(--drift),165px) rotate(90deg)}
+}
+@media(prefers-reduced-motion:reduce){.ending-celebration{display:none}}
+
+.screen-end .ending-facility{position:relative}
+.ending-facility .ending-celebration{inset:0 0 auto;height:100%;max-height:190px}
 </style></head><body><div class="wrap"><header class="top"><button class="brand" onclick="goHome()" aria-label="시작 화면"><img class="pps-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMjYyLjA3OSIgaGVpZ2h0PSIxMDMuMTgxIiB2aWV3Qm94PSI0MS4yNzAgNS40NzcgMjYyLjA3OSAxMDMuMTgxIj4NCjxkZWZzPg0KPGNsaXBQYXRoIGlkPSJjbGlwXzEiPg0KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCwxMTQuMzg2KSIgZD0iTTAgMTE0LjM4NkgzNzAuMzg0VjBIMFoiLz4NCjwvY2xpcFBhdGg+DQo8L2RlZnM+DQo8ZyBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIiBpbmtzY2FwZTpsYWJlbD0iTGF5ZXIgMSI+DQo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcF8xKSI+DQo8cGF0aCB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxMTkuODQzMyw1NC44MDg5MDQpIiBkPSJNMCAwQy04LjYxMyA1Ljg1NS0xOS42NDYgMy40NjctMjUuNDM2LTUuMzM4LTMwLjI3Ni0xMi42OTMtMzcuNTc2LTEzLjYwNy00MC40MDQtMTMuNjA3LTQ5LjYxNy0xMy42MDctNTUuOTI2LTcuMTI1LTU3Ljc5My0uNDE2SC01Ny43OTlDLTU3LjgxNi0uMzUtNTcuODI4LS4yOTctNTcuODQ4LS4yMy01Ny44NjUtLjE1NC01Ny44OTEtLjA4Mi01Ny45MDktLjAwMi01OC42NDMgMi43OTUtNTguODIyIDQuMTMzLTU4LjgyMiA3LjEwNy01OC44MjIgMjMuMTQ4LTQyLjM2NyA0MS4wMDgtMTguNjYyIDQxLjAwOCA1LjYwOSA0MS4wMDggMTkuNDk2IDIyLjUyOSAyMy4wNzQgMTIuMjYgMjMuMDE0IDEyLjQzOSAyMi45NTggMTIuNjIxIDIyLjg5NSAxMi44MDUgMTYuMDA2IDMyLjg5MS0zLjA0MiA0Ny4zMzItMjUuNDYzIDQ3LjMzMi01My42ODUgNDcuMzMyLTc2LjU3MyAyNC40NTMtNzYuNTczLTMuNzc3LTc2LjU3My0yOS4wMDgtNTguMzc0LTUwLjYwNS0zMy4xMzMtNTAuNjA1LTEyLjk5OC01MC42MDUgLjUzMS0zOS4zMTYgNi43MzgtMjMuNzYyIDEwLjE0NC0xNS4yNTQgNy43MzItNS4yNTIgMCAwIiBmaWxsPSIjMDEzODYzIi8+DQo8cGF0aCB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxNDMuMjM1OCw0My41NDUyMDYpIiBkPSJNMCAwQy0yLjk4MiAxMC4wMTYtMTYuOTc2IDI5Ljc0NC00Mi4wNTUgMjkuNzQ0LTY1Ljc2IDI5Ljc0NC04Mi4yMTUgMTEuODg1LTgyLjIxNS00LjE1Ni04Mi4yMTUtNy4xMzEtODIuMDM2LTguNDY5LTgxLjMwMS0xMS4yNjYtODEuNjA3LTEwLjA0My04MS43NzEtOC44MTQtODEuNzcxLTcuNjE5LTgxLjc3MSA5LjA4NC02NS4wNDMgMjAuNjYtNDcuODUxIDIwLjY2LTI0LjU3NiAyMC42Ni01LjcwOSAxLjc5MS01LjcwOS0yMS40NzktNS43MDktMzkuNzI1LTE2LjIwNy01NS41MTQtMzEuNDYzLTYzLjEwMkwtMzEuNDU3LTYzLjExM0MtMTEuNzk0LTU1Ljk5MiAyLjI0OC0zNy4xNTggMi4yNDgtMTUuMDQxIDIuMjQ4LTkuODA3IDEuNTQ3LTUuMTkxIDAgMCIgZmlsbD0iI2U0MDMyZSIvPg0KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMTczLjU5MTMsNDQuNjYwNCkiIGQ9Ik0wIDBWNC4zNTJIMzIuMlYwSDE4LjA0N0wzMy4wMjQtMTYuOTAyIDI5LjQ5OC0xOS43ODcgMTYuMTIzLTQuNTMzIDIuNzAzLTE5Ljc4Ny0uODI0LTE2LjkwMiAxNC4xNTQgMFpNMzQuOTAyLTI2LjkzMlYtMzEuNDJILTIuNjU3Vi0yNi45MzJIMTMuNjA0Vi0xNi4xNjhIMTguNjQzVi0yNi45MzJaIiBmaWxsPSIjNTc1NzU2Ii8+DQo8cGF0aCB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwyNTIuMDkxMyw0NS4wNzI1MDQpIiBkPSJNMCAwSDUuODYzVi00Ljk0NUgwVi0xMS43MjdILTUuMDM3VjYuODI2SDBaTS0zMS41MTItMTQuNTY0SDBWLTI1Ljc0SC0yNi40MjhWLTI5LjE3NkguNTA1Vi0zMy4zNDRILTMxLjUxMlYtMjEuOTM5SC01LjAzN1YtMTguNTUxSC0zMS41MTJaTS0xMC4zMDUtMTAuNzY0SC0zMi42MTFWNkgtMTAuODA5VjEuNzRILTI3LjU3M1YtNi41OTZILTEwLjMwNVoiIGZpbGw9IiM1NzU3NTYiLz4NCjxwYXRoIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDI5Ni4yNjUxLDYwLjAwNDIpIiBkPSJNMCAwVjcuNzg3SC03LjE0NVYxMi4xMzdIMFYyMS43NThINS4wODRWMFpNLTMuMzg5LTEwLjM1MkMtMy4zODktOC44MjYtMy45NDgtNy41MTItNS4wNjItNi40MTItNi4xNzYtNS4zMTItNy41MTItNC43NjQtOS4wNjgtNC43NjQtMTAuNTk2LTQuNzY0LTExLjkwOC01LjMxMi0xMy4wMDgtNi40MTItMTQuMTA3LTcuNTEyLTE0LjY1OC04LjgyNi0xNC42NTgtMTAuMzUyLTE0LjY1OC0xMS45MDgtMTQuMTA3LTEzLjIzLTEzLjAwOC0xNC4zMTYtMTEuOTA4LTE1LjM5Ni0xMC41OTYtMTUuOTM5LTkuMDY4LTE1LjkzOS03LjUxMi0xNS45MzktNi4xNzYtMTUuMzk2LTUuMDYyLTE0LjMxNi0zLjk0OC0xMy4yMy0zLjM4OS0xMS45MDgtMy4zODktMTAuMzUyTTEuNjAzLTEwLjM5NkMxLjYwMy0xMS43NzEgMS4zMi0xMy4wNjEgLjc1Ni0xNC4yNyAuMTkxLTE1LjQ3NS0uNTY1LTE2LjUzNS0xLjUxMi0xNy40NTEtMi40NTktMTguMzY3LTMuNTgxLTE5LjA5NC00Ljg3OS0xOS42MjktNi4xNzYtMjAuMTYtNy41NTgtMjAuNDI4LTkuMDIzLTIwLjQyOC0xMC40NTctMjAuNDI4LTExLjgzMi0yMC4xNi0xMy4xNDUtMTkuNjI5LTE0LjQ1OS0xOS4wOTQtMTUuNTg4LTE4LjM2Ny0xNi41MzUtMTcuNDUxLTE3LjQ4Mi0xNi41MzUtMTguMjM4LTE1LjQ3NS0xOC44MDMtMTQuMjctMTkuMzY3LTEzLjA2MS0xOS42NS0xMS43NzEtMTkuNjUtMTAuMzk2LTE5LjY1LTkuMDIzLTE5LjM2Ny03LjczNC0xOC44MDMtNi41MjktMTguMjM4LTUuMzItMTcuNDgyLTQuMjYtMTYuNTM1LTMuMzQ0LTE1LjU4OC0yLjQyOC0xNC40NTktMS43MDEtMTMuMTQ1LTEuMTctMTEuODMyLS42MzMtMTAuNDU3LS4zNjctOS4wMjMtLjM2Ny03LjU1OC0uMzY3LTYuMTc2LS42MzMtNC44NzktMS4xNy0zLjU4MS0xLjcwMS0yLjQ1OS0yLjQyOC0xLjUxMi0zLjM0NC0uNTY1LTQuMjYgLjE5MS01LjMyIC43NTYtNi41MjkgMS4zMi03LjczNCAxLjYwMy05LjAyMyAxLjYwMy0xMC4zOTZNLTMxLjAwOCAxNC4xMDdWMTguMzY3SC0yMS40MzdWMjIuMjZILTE2LjAzMVYxOC4zNjdILTYuOTE2VjE0LjEwN0gtMTYuODU1TC02LjU1MSAzLjY2NC05Ljg0OCAuNTQ5LTE4LjczNCA5LjgwMS0yNy41MjktLjE4NC0zMC45MTggMi45NzctMjAuNTY1IDE0LjEwN1oiIGZpbGw9IiM1NzU3NTYiLz4NCjwvZz4NCjwvZz4NCjwvc3ZnPg0K" alt="조달청"><span class="brand-game-title">오늘부터 조달청</span></button><nav class="nav" aria-label="게임 메뉴"><button onclick="showGuide()">플레이 안내</button><button type="button" class="sound-toggle sound-off" id="sound" onclick="toggleSound()" aria-pressed="false" aria-label="소리 꺼짐" title="배경·효과음 꺼짐"><svg class="sound-svg icon-off" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3z"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" d="M16 8l6 8M22 8l-6 8"/></svg><svg class="sound-svg icon-on" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" hidden><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3z"/><path fill="currentColor" d="M16.5 12a4.5 4.5 0 0 0-2.5-3.91v1.57a3 3 0 0 1 0 5.66v1.57a4.5 4.5 0 0 0 2.5-3.91z"/><path fill="currentColor" d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><span class="sound-text">소리 꺼짐</span></button><button onclick="showAbout()">게임 소개</button></nav></header><main id="app"><p class="fine" style="padding:24px">불러오는 중…</p></main><footer class="footer"><span>오늘부터 조달청 · 첫 발령 이야기</span><span><button onclick="showSources()">공식 자료 탐험 노트 ↗</button> · 비공식 창작 게임</span></footer></div><div id="overlay"></div><div id="live" class="sr" aria-live="polite"></div><script>/* Original code-drawn pixel artwork. No remote assets or font downloads. */
 function pixelIcon(kind, tone='#518b80', style) {
  const r=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
@@ -1056,7 +1089,7 @@ function resultChanges(entry){
 function ensureAc(){try{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();return ac}catch{return null}}
 function beep(good=false){if(!sound)return;const ctx=ensureAc();if(!ctx)return;const play=()=>{try{ctx.resume();const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.setValueAtTime(good?640:410,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(good?960:530,ctx.currentTime+.13);g.gain.setValueAtTime(.032,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.21);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.22)}catch{}};if(ctx.state==='suspended')ctx.resume().then(play);else play()}
 function ensureBgm(){if(!bgm&&typeof Audio==='function'&&typeof AUDIO_ASSETS!=='undefined'&&AUDIO_ASSETS.bgm){bgm=new Audio(AUDIO_ASSETS.bgm);bgm.loop=true;bgm.volume=.28;bgm.preload='auto'}return bgm}
-function playBgm(){if(!sound)return;const a=ensureBgm();if(!a||!a.paused)return;a.play().catch(()=>{})}
+function playBgm(){if(!sound||(!home&&s?.phase==='end'))return;const a=ensureBgm();if(!a||!a.paused)return;a.play().catch(()=>{})}
 function stopBgm(){if(!bgm)return;bgm.pause();try{bgm.currentTime=0}catch{}}
 function syncSound(){const btn=$('sound');if(!btn)return;const hasBgm=typeof AUDIO_ASSETS!=='undefined'&&!!AUDIO_ASSETS.bgm;const label=sound?'소리 켜짐':'소리 꺼짐';btn.classList.toggle('sound-on',sound);btn.classList.toggle('sound-off',!sound);btn.setAttribute('aria-pressed',sound);btn.setAttribute('aria-label',label);btn.title=sound?(hasBgm?'배경 루프 + 효과음':'효과음만'):'배경·효과음 꺼짐';const t=btn.querySelector('.sound-text');if(t)t.textContent=label;const on=btn.querySelector('.icon-on'),off=btn.querySelector('.icon-off');if(on)on.hidden=!sound;if(off)off.hidden=!!sound}
 function toggleSound(){sound=!sound;try{localStorage.setItem(SOUND_KEY,sound?'on':'off')}catch{}syncSound();if(sound){beep(true);playBgm()}else stopBgm()}
@@ -1071,7 +1104,7 @@ function landing(){pauseAuto();eventOpen=false;home=true;setChrome('home');const
 function blank(){return {pick:[],open:[],path:[0],order:[],selected:null,feedback:'',tries:0,tool:false,stock:null}}
 function freshBagState(){return {bagSlots:Array(12).fill(null),pendingPack:null,cityPulse:'neutral'}}
 function newGame(){createGame()}
-function createGame(){playBgm();s={version:2,name:'신입',dept:random(6),first:0,step:0,phase:'appointment',rerolled:false,avatar:random(PLAYER_AVATARS.length),energy:6,trust:2,city:[0,0,0],flags:{},bag:[],visits:[],route:[],log:[],local:blank(),seed:random(10000),weather:random(2),sourceSeen:[],streak:0,maxStreak:0,...freshBagState()};save();render();beep(true)}
+function createGame(){s={version:2,name:'신입',dept:random(6),first:0,step:0,phase:'appointment',rerolled:false,avatar:random(PLAYER_AVATARS.length),energy:6,trust:2,city:[0,0,0],flags:{},bag:[],visits:[],route:[],log:[],local:blank(),seed:random(10000),weather:random(2),sourceSeen:[],streak:0,maxStreak:0,...freshBagState()};playBgm();save();render();beep(true)}
 function resume(){s=load();eventOpen=!!(s&&s.phase==='play');if(s){playBgm();render()}else toast('저장된 이야기가 없습니다.')}
 function reroll(){if(s.phase!=='appointment'||s.rerolled)return;s.name=($('name').value.trim()||'신입').slice(0,12);s.dept=(s.dept+1+random(5))%6;s.rerolled=true;save();render()}
 const PLAYER_AVATARS=[{kind:'person',tone:'#59765d',label:'짧은 머리'},{kind:'person',tone:'#b66d44',label:'단발'},{kind:'person',tone:'#5c7d88',label:'곱슬머리'},{kind:'person',tone:'#6b8f4e',label:'올림머리'},{kind:'person',tone:'#8b6fa8',label:'앞머리와 안경'},{kind:'person',tone:'#a25d41',label:'묶은 머리'}];
@@ -1108,7 +1141,7 @@ function openEvent(){if(s.phase!=='play')return;eventOpen=true;showEventDialog()
 function showEventDialog(){
  const scroll=$('overlay').querySelector('.event-scroll')?.scrollTop||0;
  lastFocus=document.activeElement;
- $('overlay').innerHTML=`<div class="modal-back event-back"><section class="event-dialog" role="dialog" aria-modal="true" aria-labelledby="event-title"><div class="event-bar"><span id="event-title">${deptSceneKind(s.step)}</span><div>${autoMode?'<button onclick="toggleAuto()">Ⅱ 멈춤</button>':''}<button onclick="closeModal()" aria-label="선택 팝업 닫기">×</button></div></div><div class="event-scroll">${interactionHTML}</div><div class="event-foot"><span>${autoMode?'동료 랜덤 플레이 중…':'한 번 고르면 이야기가 이어집니다'}</span><button onclick="closeModal();toggleAuto()">${autoMode?'멈추기':'⚡ 속전속결 맡기기'}</button></div></section></div>`;
+ $('overlay').innerHTML=`<div class="modal-back event-back"><section class="event-dialog" role="dialog" aria-modal="true" aria-labelledby="event-title"><div class="event-bar"><span id="event-title">${deptSceneKind(s.step)}</span><div>${autoMode?'<button onclick="toggleAuto()">Ⅱ 멈춤</button>':''}<button onclick="closeModal()" aria-label="선택 팝업 닫기">×</button></div></div><div class="event-scroll">${interactionHTML}</div><div class="event-foot"><button onclick="closeModal();toggleAuto()">${autoMode?'멈추기':'⚡ 속전속결 맡기기'}</button></div></section></div>`;
  document.body.style.overflow='hidden';
  const sc=$('overlay').querySelector('.event-scroll');if(sc)sc.scrollTop=scroll;
  $('overlay').querySelector('button').focus();
@@ -1195,7 +1228,7 @@ const DEPT_CHOICE_TAIL_BY_DEPT={2:['3일 동안 재고와 필요 날짜를 맞�
 function deptProf(){return DEPT_PROFILES[s.dept]}
 function deptChip(d){return `${d.name} / ${d.org}`}
 const DEPT_PROFILES=[
-{introTitle:'첫 전화',introDesc:'명세서보다 먼저, 현장에 콘센트가 있는지부터 물어봐요.',introLead:'서윤: 명세서엔 다 있는데 교실엔 콘센트가 없대요. 그 전화가 먼저예요.',introOpts:[['school','학교 — 장비는 왔는데 콘센트 없음','🏫+1 · 교실 메모'],['factory','산업단지에 납기·물량 확인','물류·공급 메모'],['culture','문화관 설비 담당과 동선 점검','접근·동선 메모']],fieldTitle:'현장 답사',fieldDesc:'전원·설치 얘기 나오는 곳부터.',fieldPin:0,fieldMentor:0,lunch:'개학 전에 설비 위치가 또 바뀌었대. 점심은 같이 얘기할래, 잠깐 나갈래, 옆 부서랑 연락할래?',crisisLead:'물품은 도착했는데, 현장 조건이 안 맞을 때가 제일 바빠요.',crisisOpts:['콘센트·설비 맞추고 일정 우회','묶음 납품·대체 규격으로 공장 버티기','학교부터 공개 일정 재정렬'],routeTitle:'물품·견적 문의 연결',routeDesc:'업체가 조달 제도를 몰라 연락 왔어요.',routeTalk:'우리가 대신 사주진 않아요. 맞는 창구로 연결하는 게 오늘 일이에요.',routeCalls:[{name:'스타트업 제조사',say:'“규격은 있는데 나라장터 경로가 헷갈려요.”',answer:0},{name:'학교 납품 대행 업체',say:'“길잡이 상담 예약은 어디서 하죠?”',answer:1},{name:'수출 경험 있는 중소기업',say:'“G-PASS 같은 해외 제도도 같이 들을래요.”',answer:2}],projects:[['개학용 물품·전원 재점검','교실 메모 쓰면 학교 +2'],['운동장 안내 장비 패키지 정리','설치 조건 합의'],['납품업체 연락망 재정리','공장 +1 · 신뢰']],projectBias:0,nightLead:'내일 쓸 물품·설치 순서만 골라도 큰 일이에요.',nightOps:[0,3,1]},
+{introTitle:'첫 업무',introDesc:'학교·산업단지·문화관에서 장비 관련 요청이 들어왔어요.',introLead:'서윤: 오늘 들어온 요청부터 같이 볼까요?',introOpts:[['school','학교 · 교실에 콘센트가 없대요','장비를 설치할 곳과 전원 확인'],['factory','산업단지 · 장비가 언제 도착하나요?','납품 날짜와 수량 확인'],['culture','문화관 · 안내 장비는 어디에 놓을까요?','설치 위치와 반입 통로 확인']],fieldTitle:'현장 답사',fieldDesc:'전원·설치 얘기 나오는 곳부터.',fieldPin:0,fieldMentor:0,lunch:'개학 전에 설비 위치가 또 바뀌었대. 점심은 같이 얘기할래, 잠깐 나갈래, 옆 부서랑 연락할래?',crisisLead:'물품은 도착했는데, 현장 조건이 안 맞을 때가 제일 바빠요.',crisisOpts:['콘센트·설비 맞추고 일정 우회','묶음 납품·대체 규격으로 공장 버티기','학교부터 공개 일정 재정렬'],routeTitle:'물품·견적 문의 연결',routeDesc:'업체가 조달 제도를 몰라 연락 왔어요.',routeTalk:'우리가 대신 사주진 않아요. 맞는 창구로 연결하는 게 오늘 일이에요.',routeCalls:[{name:'스타트업 제조사',say:'“규격은 있는데 나라장터 경로가 헷갈려요.”',answer:0},{name:'학교 납품 대행 업체',say:'“길잡이 상담 예약은 어디서 하죠?”',answer:1},{name:'수출 경험 있는 중소기업',say:'“G-PASS 같은 해외 제도도 같이 들을래요.”',answer:2}],projects:[['개학용 물품·전원 재점검','교실 메모 쓰면 학교 +2'],['운동장 안내 장비 패키지 정리','설치 조건 합의'],['납품업체 연락망 재정리','공장 +1 · 신뢰']],projectBias:0,nightLead:'내일 쓸 물품·설치 순서만 골라도 큰 일이에요.',nightOps:[0,3,1]},
 {introTitle:'첫 업무',introDesc:'계약이랑 라벨이 어긋난 납품부터 봐요.',introLead:'서윤: 라벨을 꼼꼼히 확인하지 않으면 공급에 문제가 생길 수 있어요.',introOpts:[['school','학교 납품 물품 샘플 확인','현장 메모'],['factory','공장 입고 대기 물량 확인','물류 메모'],['culture','문화관 안내 장비 포장 상태','동선 메모']],fieldTitle:'검사 전에 현장 확인',fieldDesc:'계약이랑 현장이 다른 곳부터.',fieldPin:0,fieldMentor:0,lunch:'점심 고르기 전에 라벨 사진부터 찍었어요…',crisisLead:'비 때문에 검사 일정이 밀렸어요. 어디부터 열어둘까요?',crisisOpts:['우천 메모로 검사 일정 우회','검사팀 나눠 공장 샘플 우선','학교 검사 창만 먼저 열고 공지'],routeTitle:'품질·서류 문의 연결',routeDesc:'기업이 검사·인증 창구를 묻고 있어요.',routeTalk:'우리 업무 밖이면 다른 상담 창구로 넘겨요.',routeCalls:[{name:'스마트센서 스타트업',say:'“벤처나라 등록부터 할까요?”',answer:0},{name:'납품 대행 업체',say:'“검사 서류랑 길잡이 안내를 같이 듣고 싶어요.”',answer:1},{name:'해외 인증 준비 기업',say:'“국내 검사 경험을 해외에 쓰고 싶어요.”',answer:2}],projects:[['납품 샘플 현장 재검수','학교 +2 가능'],['문화관 장비 라벨 재확인','문화관 +2'],['입고 지연 물량 추적','산업단지 +1']],projectBias:0,nightLead:'내일 열어볼 검수·접수 순서를 정해요.',nightOps:[0,2,4]},
 {introTitle:'첫 전화',introDesc:'긴급 물량·재고·우회 경로 전화입니다. 학교·공장·문화관 중 어디부터 볼지 고릅니다.',introLead:'하천 범람으로 우회 도로가 열렸대요. 물류부터 확인할게요.',introOpts:[['factory','공장 긴급 물량 요청 확인','물류 메모'],['school','학교 비상 예비물량 확인','우천·교실 메모'],['culture','문화관 운영 물자 재고','동선 메모']],fieldTitle:'물류·비축 답사',fieldDesc:'우회·물류 현장부터.',fieldPin:2,fieldMentor:1,lunch:'점심 자리에 급한 공장부터 물량 나누는 얘기만 나왔어요. 나도 표 하나 받았어요.',crisisLead:'다리 통제야. 창고 물량을 어디로 먼저 보낼까요?',crisisOpts:['우회 연락망으로 이중 공급','비축 물량으로 공장 라인 살리기','학교 예비품 먼저 배분·공지'],routeTitle:'공급·비축 상담 연결',routeDesc:'비축물자·공급 제도를 묻는 전화예요.',routeTalk:'급하면 물량부터, 천천히면 제도 설명 창구로 연결해요.',routeCalls:[{name:'원자재 수입 대체 업체',say:'“비축물자 조달 경로가 궁금해요.”',answer:1},{name:'지역 제조 스타트업',say:'“공공조달 길잡이 상담부터 받고 싶어요.”',answer:1},{name:'해외 조달 진출 팀',say:'“국내 비축 경험을 해외 제안서에 쓰려고요.”',answer:2}],projects:[['학교 비상물량 재배분','학교 +1~2'],['공장 긴급 차분 공급','산업단지 +2'],['문화관 운영 물자 점검','문화관 +1']],projectBias:1,nightLead:'남은 물량을 어디에 쓸지 같이 정리해 봅시다.',nightOps:[1,3,5]},
 {introTitle:'시범·실험 현장',introDesc:'실험실에선 되는데, 복도에선 깨지는 제품부터 봐요.',introLead:'은별: 실험실 점수만으론 부족해요. 복도 조명·동선에서 문제가 나왔습니다.',introOpts:[['culture','문화관 시범 설치 구역 확인','동선·실험 메모'],['school','학교 스마트 장비 시범','교실 메모'],['factory','공장 자동화 센서 시험','물류 메모']],fieldTitle:'시범·실험 현장',fieldDesc:'센서·시험 얘기 나는 곳부터.',fieldPin:1,fieldMentor:2,lunch:'혁신 과제 서류를 한 번 더 출력했어요.',crisisLead:'장맛에 시험 일정이 꼬였어요. 어떤 시험부터 살릴까요?',crisisOpts:['현장 메모로 시험·설치 병행','실험 데이터 먼저 공유 — 공장 우선','학교 시범구역만 먼저 개방'],routeTitle:'혁신·시범구매 문의',routeDesc:'혁신제품 지정·시범 구매를 묻는 전화예요.',routeTalk:'좋은 아이디어부터 연결하고, 제도 설명은 창구에 맡겨요.',routeCalls:[{name:'AI 안내 로봇 팀',say:'“혁신제품 지정 전에 벤처나라부터 할까요?”',answer:0},{name:'센서 스타트업',say:'“시범구매 절차를 길잡이에서 듣고 싶어요.”',answer:1},{name:'수출형 하드웨어 팀',say:'“국내 시범 실적을 해외 입찰에 쓰고 싶어요.”',answer:2}],projects:[['학교 시범 장비 재시험','학교 +2'],['문화관 센서 복도 테스트','문화관 +2'],['공장 라인 시범 연결','산업단지 +1']],projectBias:1,nightLead:'내일 돌릴 시험·시연 순서만 골라요.',nightOps:[2,0,4]},
@@ -1243,16 +1276,18 @@ function departmentWorkStock(){
  s.local.stock=totals;
  const renderPieces=bin=>bundles.map((place,i)=>place===bin?stockPiece(i,bin):'').join('');
  const remaining=100-totals.reduce((a,b)=>a+b,0);
+ const missing=totals.map((n,i)=>[i,[40,25,10][i]-n]).filter(([,short])=>short>0);
+ const status=missing.length?'더 필요한 물량 · '+missing.map(([i,short])=>['A공장','B공장','학교 예비'][i]+' '+short+'개').join(' · '):'세 곳의 최소 물량을 채웠어요. 창고에 '+remaining+'개를 남긴 채 보낼 수 있어요.';
  const bins=['A공장','B공장','학교 예비'].map((name,i)=>
-  '<section class="stock-bin"><h3>'+name+'</h3><p>'+totals[i]+'개 · 최소 '+[40,25,10][i]+'개</p><div class="stock-pieces">'+renderPieces(i)+'</div><button class="btn outline small" onclick="moveStockPiece('+i+')" '+(s.local.stockSelected==null?'disabled':'')+'>여기에 담기</button></section>'
+  '<section class="stock-bin" data-stock-bin="'+i+'"><h3>'+name+'</h3><p>'+totals[i]+'개 · 최소 '+[40,25,10][i]+'개</p><div class="stock-pieces">'+renderPieces(i)+'</div><button class="btn outline small" onclick="moveStockPiece('+i+')" '+(s.local.stockSelected==null?'disabled':'')+'>여기에 담기</button></section>'
  ).join('');
- shell(title(deptChip(DEPTS[s.dept]),'비축 물량 나누기','한 칸은 5개입니다. 창고에서 묶음을 골라 보낼 곳에 담으세요.')+
-  '<div class="paper-body"><div class="stock-bin"><h3>창고 · '+remaining+'개</h3><div class="stock-pieces">'+renderPieces(-1)+'</div><p class="hint">15개 이상 남기면 돌발 상황에서 비축 물량을 사용할 수 있어요.</p></div><div class="stock-bins">'+bins+'</div><div class="row"><button class="btn outline small" onclick="clearStockPieces()">다시 나누기</button><button class="btn" onclick="submitStock()" '+(stockOk()?'':'disabled')+'>이대로 보내기</button></div></div>');
+ shell(title(deptChip(DEPTS[s.dept]),'비축 물량 나누기','한 칸은 5개입니다. 묶음을 끌어 원하는 칸에 놓으세요. 눌러서 옮겨도 돼요.')+
+  '<div class="paper-body"><div class="stock-bin" data-stock-bin="-1"><h3>창고 · '+remaining+'개</h3><div class="stock-pieces">'+renderPieces(-1)+'</div><p class="hint">세 곳의 최소 물량만 채우면 나머지는 창고에 둬도 돼요. 15개 이상 남기면 돌발 상황에 쓸 수 있어요.</p></div><div class="stock-bins">'+bins+'</div><p class="stock-submit-status" role="status">'+status+'</p><div class="row"><button class="btn outline small" onclick="clearStockPieces()">다시 나누기</button><button class="btn" onclick="submitStock()" '+(stockOk()?'':'disabled')+'>이대로 보내기</button></div></div>');
 }
 const STOCK_PIECES=[20,20,15,15,10,10,5,5];
 function stockPiece(i,bin){
  const n=STOCK_PIECES[i];
- return '<button type="button" class="stock-piece" aria-pressed="'+(s.local.stockSelected===i)+'" aria-label="'+n+'개 '+(bin<0?'묶음 선택':'창고로 돌려놓기')+'" onclick="pickStockPiece('+i+')"><span aria-hidden="true">'+ '■'.repeat(n/5)+'</span> '+n+'</button>';
+ return '<button type="button" class="stock-piece" data-stock-piece="'+i+'" aria-pressed="'+(s.local.stockSelected===i)+'" aria-label="'+n+'개 '+(bin<0?'묶음 선택':'창고로 돌려놓기')+'" onclick="pickStockPiece('+i+')"><span aria-hidden="true">'+ '■'.repeat(n/5)+'</span> '+n+'</button>';
 }
 function pickStockPiece(i){
  if(!isDeptWork()||s.dept!==2)return;
@@ -1536,20 +1571,37 @@ function endingFacilitiesHtml(){
  const events=['개학','가동','개관'];
  return '<div class="ending-facilities">'+CITY_SITES.map((name,i)=>{
   const score=s.city[i],passed=score>=CITY_OK,grade=score>=8?'S':score>=7?'A':passed?'B':score>=CITY_MID?'C':'D';
-  const followup=[SCHOOL_FOLLOWUP[s.first],['일부 생산라인부터 가동','먼저 도착한 원자재로 일부 라인부터 돌렸어요. 나머지 물량은 공급 일정을 다시 확인합니다.'],['일부 공간부터 운영','준비가 끝난 공간부터 열었어요. 나머지 공간은 점검을 마친 뒤 이용할 수 있도록 안내했습니다.']][i];
+  const followup=[SCHOOL_FOLLOWUP[s.first],['일부 생산라인부터 가동','먼저 도착한 원자재로 일부 라인부터 돌렸어요. 나머지 물량은 공급 일정을 다시 확인합니다.'],(score<CITY_MID?['한산한 개관 첫날','문화관은 문을 열었지만 안내와 예약 준비가 늦어 찾아온 사람이 적었어요. 운영팀은 관람 안내를 다시 정리하기로 했습니다.']:['전시실부터 운영','관람객이 전시실을 둘러봤어요. 공연장은 장비 점검을 마친 뒤 열기로 했습니다.'])][i];
   const verdict=passed?events[i]+' 준비 완료':followup[0];
-  return '<article class="ending-facility '+cityTier(score).class+'">'+facilityPixelScene(i,score)+'<div class="facility-result-copy"><h2>'+name+'</h2><span class="facility-stamp '+(passed?'stamp-ready':'stamp-followup')+'">'+(passed?'✓ 준비 완료':'! 보완 필요')+'</span><strong>'+verdict+'</strong><p>준비도 '+score+'/8 · 등급 '+grade+'</p><p>'+(passed?facilityOutcome(i).detail:followup[1])+'</p></div></article>';
+  return '<article class="ending-facility '+cityTier(score).class+'">'+facilityPixelScene(i,score)+(passed?endingCelebration(i):'')+'<div class="facility-result-copy"><h2>'+name+'</h2><span class="facility-stamp '+(passed?'stamp-ready':'stamp-followup')+'">'+(passed?'✓ 준비 완료':'! 보완 필요')+'</span><strong>'+verdict+'</strong><p>준비도 '+score+'/8 · 등급 '+grade+'</p><p>'+(passed?facilityOutcome(i).detail:followup[1])+'</p></div></article>';
  }).join('')+'</div>';
 }
 function deptRunPunch(){const k=DEPTS[s.first].kind;return {kit:'교실 전원·설치 조건을 맞추는 일이 많았습니다.',inspect:'납품 라벨·현물 확인이 이어졌습니다.',route:'비축 물량과 우회 공급이 공장 쪽으로 기울었습니다.',test:'현장 시험·시범 구매 조건을 맞췄습니다.',path:'출입·동선 불편을 걸어 확인했습니다.',order:'예약·안내 화면 연결을 살렸습니다.'}[k]||''}
 function endingSummary(){
+ const ready=CITY_SITES.filter((_,i)=>s.city[i]>=CITY_OK);
+ if(ready.length===3)return '학교에 안내 방송이 울리고, 공장에 다시 불이 켜졌어요. 문화관에도 관람객이 모였습니다. 오늘 준비한 일이 세 곳의 일상으로 이어졌어요.';
+ if(!ready.length)return '세 현장에 보완할 일이 남았어요. 오늘 확인한 문제와 메모를 다음 담당자에게 남겼습니다.';
  const pending=CITY_SITES.filter((_,i)=>s.city[i]<CITY_OK);
- if(!pending.length)return '세 현장 모두 예정된 준비를 마쳤어요.';
- if(pending.length===3)return '세 현장 모두 보완할 일이 남았어요. 카드에서 이어서 할 일을 확인해 보세요.';
- return pending.join('·')+'은 보완할 일이 남았고, 나머지 현장은 준비를 마쳤어요.';
+ return ready.join('·')+'의 준비를 마쳤어요. '+pending.join('·')+'에서 이어서 할 일은 동료에게 남겼습니다.';
 }
 function endingLead(){const ready=s.city.filter(n=>n>=CITY_OK).length;return ready===3?'세 현장 모두 준비를 마쳤어요.':'세 현장 중 '+ready+'곳의 준비를 마쳤어요.'}
+function playEndingCue(){
+ if(!sound)return;
+ stopBgm();
+ const ctx=ensureAc();
+ if(!ctx||ctx.state!=='running')return;
+ const start=ctx.currentTime;
+ [523.25,659.25,783.99,1046.5].forEach((pitch,i)=>{
+  const at=start+i*.16,osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type='sine';osc.frequency.value=pitch;
+  gain.gain.setValueAtTime(.001,at);
+  gain.gain.exponentialRampToValueAtTime(.035,at+.035);
+  gain.gain.exponentialRampToValueAtTime(.001,at+.35);
+  osc.connect(gain);gain.connect(ctx.destination);osc.start(at);osc.stop(at+.36);
+ });
+}
 function completeFinale(){
+ stopBgm();playEndingCue();
  s.log.push({step:9,day:30,dept:s.dept,title:'세 현장 결과',text:endingLead(),effect:{},source:11});
  s.step=10;s.phase='end';eventOpen=false;save();
 }
@@ -1558,12 +1610,15 @@ function endingRecapHtml(){return endingRecap().map(t=>`<p>${t}</p>`).join('')}
 function result(){const e=s.log.at(-1),src=SOURCES[e.source];const fin=s.step===9,g=parseGrade(e.title,e.effect);const nextLabel=fin?'오늘 결과 보기':deptSceneTitle(s.step+1);const body=e.effect?.miniGrade?`<div class="story-result"><p>${e.text}</p></div>`:resultMainHtml(e);const pack=packInteractHtml();shell(title(fin?'🏁 마지막 장면':'✓ 장면 완료',e.title,'')+`<div class="paper-body"><div class="effect-chips">${resultChanges(e)}</div>${g?`<div class="result-grade grade-${g}"><span>${g}</span><small>${gradeCaption(g,e.effect)}</small></div>`:''}${isReservationResult(e)?reservationPreview():resultPixelArt(e)}${body}${pack}${fin?'':`<details class="learning"><summary>📚 조달청 한 줄 (보너스)</summary><p>${src.fact}</p><a href="${src.url}" target="_blank" rel="noopener noreferrer">${src.title} ↗</a></details>`}<button class="btn full pulse" onclick="advance()" >${nextLabel+' →'}</button></div>`)}
 function effectText(e){let t=[];if(e.energy)t.push({t:`${METER_ENERGY} ${e.energy>0?'+':''}${e.energy}`,ok:e.energy>=0});if(e.trust)t.push({t:`${METER_TRUST} ${e.trust>0?'+':''}${e.trust}`,ok:e.trust>=0});if(e.city)e.city.forEach((n,i)=>{if(n)t.push({t:`${['학교','산업단지','문화관'][i]} +${n}`,ok:true})});if(e.bag)t.push({t:`+ ${e.bag}`,ok:true});return t.map(x=>`<span class="chip ${x.ok?'gain':'cost'}">${esc(x.t)}</span>`).join('')}
 function endTitle(){const c=s.city,ok=c.filter(n=>n>=CITY_OK).length,mid=c.filter(n=>n>=CITY_MID&&n<CITY_OK).length,top=topCity();if(ok===3)return '세 곳을 다 맞췄습니다';if(ok===1&&c.filter(n=>!n).length>=2)return `${CITY_SITES[top]} 쪽을 끝까지 밀었습니다`;if(mid>=2&&ok===0)return '세 곳 모두 버텼습니다';if(Math.max(...c)-Math.min(...c)>=4)return '한곳에 일이 몰렸습니다';if(s.flags.callsComplete&&ok>=2)return '현장과 창구를 이은 하루';return '첫 업무를 마쳤습니다'}
+function endingCelebration(site){
+ return '<div class="ending-celebration" aria-hidden="true">'+Array.from({length:12},(_,i)=>'<i style="--x:'+(8+(i*37)%85)+'%;--delay:'+site*110+(i%7)*45+'ms;--drift:'+(i%2?24:-24)+'px;--tone:'+['#f0b447','#68a883','#e18063','#5790af'][i%4]+'"></i>').join("")+'</div>';
+}
 function ending(){
- pauseAuto();closeModal();setChrome('focus');
+ pauseAuto();closeModal();stopBgm();setChrome('focus');
  $('app').innerHTML=`<section class="center wide-end screen screen-end">
-  <header class="ending-heading"><h1>세 현장 결과</h1><p>${esc(DEPTS[s.first].name)} · ${endingLead()}</p></header>
+  <header class="ending-heading"><span class="label">오늘 업무를 마쳤어요</span><h1>세 현장 결과</h1><p>${esc(DEPTS[s.first].name)} · ${endingLead()}</p></header>
   ${endingFacilitiesHtml()}
-  <p class="ending-summary"><strong>한 줄 총평</strong> ${endingSummary()}</p>
+  <p class="ending-summary"><strong>오늘을 마치며</strong> ${endingSummary()}</p>
   <div class="row ending-actions"><button class="btn" onclick="newGame()">다시 발령받기</button><button class="btn outline" onclick="downloadReport()">이야기 저장</button><button class="btn outline" onclick="showLog()">선택 다시 보기</button></div>
  </section>`;
 }
@@ -1577,6 +1632,43 @@ document.addEventListener('visibilitychange',()=>{if(!bgm||!sound)return;if(docu
 document.addEventListener('pointerdown',onPathPointerDown);
 document.addEventListener('pointermove',onPathPointerMove);
 document.addEventListener('pointerup',pathPointerUp);
+let stockDrag=null;
+function clearStockDrag(){
+ stockDrag?.ghost?.remove();
+ stockDrag?.target?.classList.remove('stock-drop-target');
+ stockDrag=null;
+}
+document.addEventListener('pointerdown',e=>{
+ const piece=e.target.closest('.stock-piece[data-stock-piece]');
+ if(!piece||e.button!==0||stockDrag)return;
+ stockDrag={id:e.pointerId,index:Number(piece.dataset.stockPiece),x:e.clientX,y:e.clientY,piece};
+});
+document.addEventListener('pointermove',e=>{
+ if(stockDrag?.id!==e.pointerId)return;
+ if(!stockDrag.ghost){
+  if(Math.hypot(e.clientX-stockDrag.x,e.clientY-stockDrag.y)<8)return;
+  const ghost=stockDrag.piece.cloneNode(true);
+  ghost.classList.add('stock-drag-ghost');ghost.setAttribute('aria-hidden','true');ghost.tabIndex=-1;
+  document.body.appendChild(ghost);stockDrag.ghost=ghost;
+ }
+ stockDrag.ghost.style.left=e.clientX+'px';stockDrag.ghost.style.top=e.clientY+'px';
+ stockDrag.target?.classList.remove('stock-drop-target');
+ stockDrag.target=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-stock-bin]');
+ stockDrag.target?.classList.add('stock-drop-target');
+});
+document.addEventListener('pointerup',e=>{
+ if(stockDrag?.id!==e.pointerId)return;
+ const drag=stockDrag,bin=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-stock-bin]');
+ clearStockDrag();
+ if(!drag.ghost)return;
+ const cancelClick=event=>{event.preventDefault();event.stopImmediatePropagation()};
+ drag.piece.addEventListener('click',cancelClick,{capture:true,once:true});
+ setTimeout(()=>drag.piece.removeEventListener('click',cancelClick,true),0);
+ if(!bin||!isDeptWork()||s.dept!==2)return;
+ s.local.stockBundles[drag.index]=Number(bin.dataset.stockBin);s.local.stockSelected=null;
+ play();save();beep();
+});
+document.addEventListener('pointercancel',e=>{if(stockDrag?.id===e.pointerId)clearStockDrag()});
 document.addEventListener('pointercancel',pathPointerUp);
 document.addEventListener('keydown',e=>{if(s?.phase==='result'&&!$('overlay').firstElementChild&&e.key==='Enter'){e.preventDefault();advance();return}if(!$('overlay').firstElementChild)return;if(e.key==='Escape')closeModal();if(e.key==='Tab'){const a=Array.from($('overlay').querySelectorAll('button,a,input,select,[tabindex="0"]')).filter(x=>!x.disabled);if(e.shiftKey&&document.activeElement===a[0]){e.preventDefault();a.at(-1).focus()}else if(!e.shiftKey&&document.activeElement===a.at(-1)){e.preventDefault();a[0].focus()}}});
 function bootGame(){try{syncSound();landing()}catch(e){const app=$('app');if(app)app.innerHTML=`<section class="screen"><p><b>화면을 불러오지 못했어요.</b></p><p class="fine">${esc(String(e?.message||e))}</p><p class="fine">HTML과 같은 폴더에 <code>assets/</code>가 있어야 해요. <code>node build-game.cjs</code> 후 다시 열어 주세요.</p></section>`;console.error(e)}}
