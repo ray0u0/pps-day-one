@@ -646,3 +646,14 @@
 .source-card p{font-size:15px;line-height:1.6}
 .source-card a{display:inline-flex;align-items:center;min-height:44px;margin-top:auto;font-size:14px;font-weight:700;color:#235644;text-decoration:underline}
 @media(max-width:600px){.source-grid{grid-template-columns:1fr}}
+
+.chrome-focus .nav button:not(.sound-toggle){display:inline-flex;align-items:center}
+.help-notes{display:grid;gap:12px}
+.help-notes section{padding:12px 14px;border:1px solid #cbd6c8;border-radius:7px;background:#f4f7ef}
+.help-notes h3{font-size:17px;margin:0 0 5px}
+.help-notes p{font-size:15px;line-height:1.65;margin:0;word-break:keep-all}
+.modal:has(.help-notes){max-height:calc(100dvh - 24px);overflow:auto}
+@media(max-width:600px){
+ .chrome-focus .nav{flex-wrap:wrap;gap:4px}
+ .chrome-focus .nav button{min-height:44px;padding:6px 8px}
+}

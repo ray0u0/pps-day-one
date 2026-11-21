@@ -205,7 +205,7 @@ function shell(content){
  const isResult=s.phase==='result',entry=s.log.at(-1);
  const playBtn=eventOpen?'선택 창 보기 →':s.step===1?'지도 펼쳐 보기':s.step===2?'미니게임 열기 →':s.step===4?'핵심 업무 열기 →':'선택하기 →';
  const g=isResult?parseGrade(entry.title,entry.effect):'';
- s.streak=s.streak||0;$('app').innerHTML=`<section class="screen compact-game">${runProgress()}<div class="play-toolbar"><div><span class="label">${esc(s.name)} ${streakChip()}</span><b class="dept-play-name">${esc(DEPTS[s.dept].name)}</b><small class="dept-play-org muted">${esc(DEPTS[s.dept].org)}</small><small class="dept-run-lens">${esc(DEPTS[s.dept].tag)}</small></div><div class="play-controls"><button class="btn small ${autoMode?'light':'outline'}" onclick="toggleAuto()" aria-pressed="${autoMode}">${autoMode?'Ⅱ 자동 선택 멈춤':'자동 선택'}</button><label class="sr" for="pace">자동 진행 속도</label><select id="pace" onchange="setPace(this.value)"><option value="5000" ${autoDelay===5000?'selected':''}>느긋하게</option><option value="3000" ${autoDelay===3000?'selected':''}>보통</option><option value="1200" ${autoDelay===1200?'selected':''}>빠르게</option></select></div></div><div class="story-layout"><aside class="story-aside"><div class="mini-id">${playerMiniAvatarHtml()}<div><h3>${esc(s.name)}</h3><small>${esc(DEPTS[s.dept].perk)} · ${esc(DEPTS[s.dept].name)}</small></div></div>${siteProgress()}${stats()}<div class="side-heading">${isResult&&s.bag.length?'나의 도구함 · 단서':'나의 도구함'}</div>${toolbagAsideHtml()}<button class="log-btn" onclick="showLog()">나의 이야기 기록 ↗</button><button class="log-btn" onclick="showSources()">조달청 탐험 노트 ↗</button></aside><div class="story-main"><details class="mobile-site-progress mobile-notes"><summary>현장 진행 상황 · ${s.city.filter(n=>n>=CITY_OK).length}/3곳 준비 완료</summary>${siteProgress()}</details><div class="play-site-scenes" aria-label="세 현장 모습">${CITY_SITES.map((name,i)=>`<figure>${facilityPixelScene(i,s.city[i])}<figcaption>${name}</figcaption></figure>`).join('')}</div><article class="paper story-preview"><div class="preview-top"><span class="chip">${isResult?'✓ 장면 완료':deptSceneKind(s.step)}</span><span class="label muted">${s.step+1} / 10</span></div>${g?`<div class="result-grade grade-${g}"><span>${g}</span><small>${gradeCaption(g,entry.effect)}</small></div>`:''}<h2>${isResult?entry.title:deptSceneTitle(s.step)}</h2>${isResult?`<div class="effect-chips">${resultChanges(entry)}</div>`:''}${!isResult&&deptStepHook(s.step)?`<p class="scene-dept-hook">${deptStepHook(s.step)}</p>`:''}<div class="scene-mission">${isResult?(entry.effect?.miniGrade?entry.text:resultPreviewText(entry)):sceneGoal(s.step)}</div>${isResult?`${firstWebPreview(entry)||(isReservationResult(entry)?reservationPreview():resultPixelArt(entry))}`:''}${isResult&&s.pendingPack?packResultHtml():''}${eventOpen&&s.phase==='play'?'<p class="popup-hint">👇 팝업에서 고르기 (닫았으면 아래 버튼)</p>':''}<div class="fixed-decisions">${isResult?`<button class="btn full pulse" onclick="advance()" >${s.step===9?'오늘 결과 보기 →':`다음 장면 → (Enter)`}</button><button class="text-button" onclick="openDetail()">장면 다시 보기</button>`:`<button class="btn full pulse" onclick="openEvent()">${playBtn}</button>`}</div></article>${mobileHud()}<div class="compact-status" title="힘=바쁨, 도움=협업 · 큰 효과는 위 시설 점수"><span>힘 ${s.energy}/10 · 도움 ${s.trust}/8</span> <span>${autoMode?'자동 선택 중':'자동 저장'}</span></div></div></div></section>`;
+ s.streak=s.streak||0;$('app').innerHTML=`<section class="screen compact-game">${runProgress()}<div class="play-toolbar"><div><span class="label">${esc(s.name)} ${streakChip()}</span><b class="dept-play-name">${esc(DEPTS[s.dept].name)}</b><small class="dept-play-org muted">${esc(DEPTS[s.dept].org)}</small><small class="dept-run-lens">${esc(DEPTS[s.dept].tag)}</small></div><div class="play-controls"><button class="btn small ${autoMode?'light':'outline'}" onclick="toggleAuto()" aria-pressed="${autoMode}">${autoMode?'Ⅱ 자동 선택 멈춤':'자동 선택'}</button><label class="sr" for="pace">자동 진행 속도</label><select id="pace" onchange="setPace(this.value)"><option value="5000" ${autoDelay===5000?'selected':''}>느긋하게</option><option value="3000" ${autoDelay===3000?'selected':''}>보통</option><option value="1200" ${autoDelay===1200?'selected':''}>빠르게</option></select></div></div><div class="story-layout"><aside class="story-aside"><div class="mini-id">${playerMiniAvatarHtml()}<div><h3>${esc(s.name)}</h3><small>${esc(DEPTS[s.dept].perk)} · ${esc(DEPTS[s.dept].name)}</small></div></div>${siteProgress()}${stats()}<div class="side-heading">${isResult&&s.bag.length?'나의 도구함 · 단서':'나의 도구함'}</div>${toolbagAsideHtml()}<button class="log-btn" onclick="showLog()">나의 이야기 기록 ↗</button></aside><div class="story-main"><details class="mobile-site-progress mobile-notes"><summary>현장 진행 상황 · ${s.city.filter(n=>n>=CITY_OK).length}/3곳 준비 완료</summary>${siteProgress()}</details><div class="play-site-scenes" aria-label="세 현장 모습">${CITY_SITES.map((name,i)=>`<figure>${facilityPixelScene(i,s.city[i])}<figcaption>${name}</figcaption></figure>`).join('')}</div><article class="paper story-preview"><div class="preview-top"><span class="chip">${isResult?'✓ 장면 완료':deptSceneKind(s.step)}</span><span class="label muted">${s.step+1} / 10</span></div>${g?`<div class="result-grade grade-${g}"><span>${g}</span><small>${gradeCaption(g,entry.effect)}</small></div>`:''}<h2>${isResult?entry.title:deptSceneTitle(s.step)}</h2>${isResult?`<div class="effect-chips">${resultChanges(entry)}</div>`:''}${!isResult&&deptStepHook(s.step)?`<p class="scene-dept-hook">${deptStepHook(s.step)}</p>`:''}<div class="scene-mission">${isResult?(entry.effect?.miniGrade?entry.text:resultPreviewText(entry)):sceneGoal(s.step)}</div>${isResult?`${firstWebPreview(entry)||(isReservationResult(entry)?reservationPreview():resultPixelArt(entry))}`:''}${isResult&&s.pendingPack?packResultHtml():''}${eventOpen&&s.phase==='play'?'<p class="popup-hint">👇 팝업에서 고르기 (닫았으면 아래 버튼)</p>':''}<div class="fixed-decisions">${isResult?`<button class="btn full pulse" onclick="advance()" >${s.step===9?'오늘 결과 보기 →':`다음 장면 → (Enter)`}</button><button class="text-button" onclick="openDetail()">장면 다시 보기</button>`:`<button class="btn full pulse" onclick="openEvent()">${playBtn}</button>`}</div></article>${mobileHud()}<div class="compact-status" title="힘=바쁨, 도움=협업 · 큰 효과는 위 시설 점수"><span>힘 ${s.energy}/10 · 도움 ${s.trust}/8</span> <span>${autoMode?'자동 선택 중':'자동 저장'}</span></div></div></div></section>`;
  if(eventOpen&&s.phase==='play')showEventDialog();
 }
 function openDetail(){pauseAuto();modal('이번 장면 자세히 보기',interactionHTML)}
@@ -281,7 +281,7 @@ function webField(){
  const active=s.visits.at(-1),page=WEB_CHECKS[active];
  const menus=[['지난 공지','자료실','개학 안내'],['다운로드','장비 목록','사용 방법'],['공지사항','자료실','문의 접수'],['행사 사진','지난 공지','이용 안내 › 예약']];
  const tabs=WEB_CHECKS.map(([name],i)=>'<button class="btn outline small" onclick="visit('+i+')" '+(s.visits.length>=2&&!s.visits.includes(i)?'disabled':'')+'>'+ (s.visits.includes(i)?'✓ ':'')+name+'</button>').join('');
- shell(title(deptChip(DEPTS[5]),'홈페이지 점검','화면 예시 두 곳을 확인하고 불편한 점을 메모하세요.')+
+ shell(title(deptChip(DEPTS[5]),'홈페이지 점검','화면 예시 두 곳을 고르세요. 다시 누르면 선택을 취소할 수 있어요.')+
  '<div class="paper-body"><div class="row">'+tabs+'</div>'+(page?webMock(page[0],menus[active])+'<p class="feedback">'+page[1]+'</p>':'')+
  '<button class="btn full" onclick="finishField()" '+(s.visits.length<2?'disabled':'')+'>점검 마치기 · '+s.visits.length+'/2</button></div>');
 }
@@ -294,9 +294,29 @@ const INSPECTION_VISITS=[
 function fieldPlaces(){
  return s.dept===1?PLACES.map((place,i)=>({...place,flag:undefined,...INSPECTION_VISITS[i]})):PLACES;
 }
-function field(){if(s.dept===5)return webField();const max=s.flags.observer?3:2,p=deptProf(),selected=s.visits.at(-1);const rec=p.fieldPin;shell(title(deptChip(DEPTS[s.dept]),p.fieldTitle,s.dept===1?`물품을 검사하기 전에 어디서 어떻게 쓰일지 확인해요. ${max}곳을 둘러볼 수 있어요.`:`둘러볼 곳 ${max}곳`) +`<div class="paper-body"><div class="puzzle-hud"><span>탐색 완료 <b>${s.visits.length}/${max}</b></span></div><div class="field-map"><div class="map-river"></div><div class="map-road"></div>${fieldPlaces().map((pl,i)=>`<button class="map-pin ${s.visits.includes(i)?'visited':''} ${i===rec?'pin-rec':''}" style="left:${pl.x}%;top:${pl.y}%" onclick="visit(${i})" ${!s.visits.includes(i)&&s.visits.length>=max?'disabled':''} aria-label="${pl.name}${i===rec?' · 추천':''}${s.visits.includes(i)?' · 탐색 완료':''}"><b>${s.visits.includes(i)?'✓':pixelIcon(['building','light','truck','building'][i])}</b><span>${pl.name}</span>${s.visits.includes(i)?'<small class="pin-note">탐색 완료</small><em class="pin-loot">'+esc(pl.bag)+'</em>':''}</button>`).join('')}</div>${selected!==undefined?`<div class="feedback ok-loot">${fieldPlaces()[selected].detail}</div>`:`<p class="hint">현장을 누르면 확인한 내용이 메모로 들어갑니다.</p>`}<button class="btn full pulse" onclick="finishField()" ${s.visits.length<max?'disabled':''}>${s.visits.length>=max?'✓ 탐색 마치고 복귀 →':`아직 ${max-s.visits.length}곳 더 확인`}</button></div>`)}
-function visit(i){if(s.phase!=='play'||s.step!==1||!fieldPlaces()[i])return;if(s.visits.includes(i)){toast(`이미 확인한 현장`);return}if(s.visits.length>=(s.flags.observer?3:2))return;s.visits.push(i);if(s.dept===5){save();play();return}apply({flag:fieldPlaces()[i].flag,bag:fieldPlaces()[i].bag});toastWin(`📍 ${fieldPlaces()[i].name} — ${fieldPlaces()[i].bag}`);save();play();beep()}
-function finishField(){if(s.visits.length<(s.flags.observer?3:2))return;if(s.dept===5){const clues=s.visits.map(i=>WEB_CHECKS[i][2]);clues.forEach(bag=>apply({bag}));return finish('홈페이지 점검 완료','화면에서 찾은 불편을 기록했어요. 다음에는 문화관 예약 화면을 정리합니다.',{trust:1,clues},5)}const clues=s.visits.map(i=>fieldPlaces()[i].bag);const crisis=s.flags.rain||s.flags.harbor;finish('현장 탐색 완료',`단서 ${clues.length}개를 도구함에 넣었습니다.`,{energy:-1,trust:1,clues,crisisUnlocked:crisis},fieldPlaces()[s.visits[0]].source)}
+function field(){if(s.dept===5)return webField();const max=s.flags.observer?3:2,p=deptProf(),selected=s.visits.at(-1);const rec=p.fieldPin;shell(title(deptChip(DEPTS[s.dept]),p.fieldTitle,s.dept===1?`물품을 검사하기 전에 어디서 어떻게 쓰일지 확인해요. ${max}곳을 둘러볼 수 있어요.`:`둘러볼 곳 ${max}곳`) +`<div class="paper-body"><div class="puzzle-hud"><span>선택한 장소 <b>${s.visits.length}/${max}</b></span></div><div class="field-map"><div class="map-river"></div><div class="map-road"></div>${fieldPlaces().map((pl,i)=>`<button class="map-pin ${s.visits.includes(i)?'visited':''} ${i===rec?'pin-rec':''}" style="left:${pl.x}%;top:${pl.y}%" onclick="visit(${i})" ${!s.visits.includes(i)&&s.visits.length>=max?'disabled':''} aria-label="${pl.name}${i===rec?' · 추천':''}${s.visits.includes(i)?' · 선택됨, 다시 누르면 취소':''}"><b>${s.visits.includes(i)?'✓':pixelIcon(['building','light','truck','building'][i])}</b><span>${pl.name}</span>${s.visits.includes(i)?'<small class="pin-note">선택 취소</small><em class="pin-loot">'+esc(pl.bag)+'</em>':''}</button>`).join('')}</div>${selected!==undefined?`<div class="feedback ok-loot">${fieldPlaces()[selected].detail}</div>`:`<p class="hint">장소를 누르면 내용을 볼 수 있어요. 다시 누르면 선택을 취소합니다.</p>`}<button class="btn full pulse" onclick="finishField()" ${s.visits.length<max?'disabled':''}>${s.visits.length>=max?'답사 마치기 →':`아직 ${max-s.visits.length}곳 더 확인`}</button></div>`)}
+function visit(i){
+ if(s.phase!=='play'||s.step!==1||!fieldPlaces()[i])return;
+ const index=s.visits.indexOf(i);
+ if(index>=0)s.visits.splice(index,1);
+ else{
+  if(s.visits.length>=(s.flags.observer?3:2))return;
+  s.visits.push(i);
+ }
+ save();play();beep();
+}
+function finishField(){
+ if(s.phase!=='play'||s.step!==1||s.visits.length<(s.flags.observer?3:2))return;
+ if(s.dept===5){
+  const clues=s.visits.map(i=>WEB_CHECKS[i][2]);
+  return finish('홈페이지 점검 완료','화면에서 찾은 불편을 기록했어요. 다음에는 문화관 예약 화면을 정리합니다.',{trust:1,clues},5);
+ }
+ const places=fieldPlaces();
+ const selected=s.visits.map(i=>places[i]);
+ for(const place of selected)if(place.flag)s.flags[place.flag]=true;
+ const clues=selected.map(place=>place.bag);
+ finish('현장 탐색 완료','메모 '+clues.length+'개를 저장했어요.',{energy:-1,trust:1,clues,crisisUnlocked:!!(s.flags.rain||s.flags.harbor)},selected[0].source);
+}
 
 const DEPT_STORIES=[
  ['개학 전날, 설비 위치 변경','개학 전날입니다. 학교에서 운동장 안내 장비 설치 위치를 바꿔 달래요. 시간이 얼마 없어요.',['현장부터 전원·동선 다시 확인','설치 담당이랑 역할 나눠 맞추기','잠깐 달아 보고 반응만 듣기']],
@@ -723,8 +743,23 @@ function showSources(){
  }).join('');
  modal('조달청 탐험 노트','<div class="source-notes"><p class="source-intro">게임에서 만난 업무와 제도를 조달청 자료에서 더 알아볼 수 있어요. 게임 속 사건과 퍼즐은 가상의 사례입니다.</p>'+sections+'</div>');
 }
-function showGuide(){pauseAuto();modal('플레이 안내',`<div class="badge"><h3>이 게임은</h3><p>조달청 <b>한 부서</b> 발령으로 업무 맥락을 짧게 체험하는 <b>비공식 소개용</b> 이야기입니다. 실제 절차·권한과 다릅니다.</p></div><div class="badge"><h3>현장별 준비도</h3><p>학교·산업단지·문화관 각 8점. <b>5점+</b> 준비 끝. 선택 칩에 +숫자가 보이면 여기에 쌓입니다.</p></div><div class="badge"><h3>힘 · 동료 도움 (보조)</h3><p><b>오늘 남은 힘</b>은 바쁨(일하면 줄고 점심에 회복). <b>동료 도움</b>은 협업(높으면 돌발·밤 업무 일부가 열림).</p></div><div class="badge"><h3>부서마다 다른 체험</h3><p>미니게임과 핵심 업무는 발령 부서마다 다릅니다. 다시 시작하면 다른 부서를 볼 수 있어요.</p></div><div class="badge"><h3>소리</h3><p>기본은 소리 켜짐이에요. 새 게임이나 이어하기를 누르면 배경음이 시작됩니다.</p></div><p class="fine">자동 진행 · 로컬 저장 · 장면 끝에 조달청 탐험 노트</p><button class="btn full" onclick="closeModal()">시작할게요 →</button>`)}
-function showAbout(){pauseAuto();modal('첫 발령, 그다음 이야기',`<p>조달청 <b>한 부서</b> 발령으로 “무슨 기관인지”를 짧게 알아가는 비공식 체험 게임입니다. 실제 조달청 서비스가 아니며, 공무원의 실제 권한·인사·계약 절차를 재현하지 않습니다.</p><p>게임 화면·도시 그림·사건·프로그램은 새로 제작했습니다. 사용자가 제공한 조달청 로고와 나르미·달이 이미지를 HTML에 포함했습니다. 외부 파일을 불러오지 않고 실행되며 실시간 AI 연결이나 개인정보 전송은 없습니다. 배경은 제작한 짧은 mp3 루프를 HTML에 넣었고, 클릭 효과음은 Web Audio로 생성합니다. 외부 주소에서 음원을 불러오지 않습니다. 생성형 AI를 자료 정리와 기획·코딩 보조에 활용했습니다.</p><p>이번 버전은 반복 업무를 이야기·탐색·퍼즐·관계·선택으로 교체하고 한 시즌 한 부서로 진행합니다. 이전 부서 이동 화면에 저장된 기록도 자동으로 이어집니다. 구버전 저장 기록은 삭제하지 않으며 새 이야기의 저장 공간은 별도로 사용합니다.</p><button class="btn outline" onclick="closeModal();showSources()">공식 자료와 참고 범위 확인 →</button>`)}
+function showGuide(){
+ pauseAuto();
+ modal('플레이 안내',`<div class="help-notes">
+ <section><h3>목표</h3><p>발령받은 부서에서 학교 개학, 산업단지 재가동, 문화관 개관을 도와요. 현장별 준비도가 5/8 이상이면 준비 완료입니다.</p></section>
+ <section><h3>조작과 진행</h3><p>선택지는 클릭하거나 터치하세요. 답사 장소는 다시 누르면 취소할 수 있고, 답사를 마칠 때 메모가 저장돼요. 마지막 업무에서는 확정 전에 예상 준비도를 볼 수 있어요.</p></section>
+ <section><h3>남은 힘과 동료 도움</h3><p>업무를 하면 힘이 줄고, 점심을 먹으면 회복돼요. 동료 도움이 쌓이면 일부 협업 선택지가 열려요.</p></section>
+ <section><h3>자동 선택과 이어하기</h3><p>자동 선택을 켜도 선택지는 보이고, 직접 조작하면 멈춰요. 진행 상황은 같은 브라우저에서 이어 할 수 있어요.</p></section>
+ </div>`);
+}
+function showAbout(){
+ pauseAuto();
+ modal('게임 소개',`<div class="help-notes">
+ <section><h3>오늘부터 조달청</h3><p>조달청이 어떤 일을 하는 곳인지 웹에서 가볍게 알아보는 시뮬레이션이에요. 게임 속 여섯 부서 중 한 곳에 발령받아, 현장 요청을 확인하고 부서에 맞는 업무를 맡습니다.</p></section>
+ <section><h3>선택이 바꾸는 세 현장</h3><p>물품 구매, 납품 검사, 비축물자 공급 등에서 착안한 일을 해보고, 내 선택이 학교·산업단지·문화관의 준비에 어떤 영향을 줬는지 확인할 수 있어요.</p></section>
+ <section><h3>게임과 실제 업무</h3><p>조달청의 역할을 참고해 만든 비공식 창작 게임이에요. 사건과 퍼즐은 가상의 사례이며, 관련 공식 자료는 화면 맨 아래 ‘탐험 노트’에 모아 뒀어요.</p></section>
+ </div>`);
+}
 document.addEventListener('visibilitychange',()=>{if(!bgm||!sound)return;if(document.hidden)bgm.pause();else bgm.play().catch(()=>{})});
 document.addEventListener('pointerdown',onPathPointerDown);
 document.addEventListener('pointermove',onPathPointerMove);
