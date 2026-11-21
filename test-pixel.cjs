@@ -32,6 +32,13 @@ start(2,5);s.flags={};s.bag=[];s.trust=0;crisisChoice(0);crisisChoice(1);assert.
 start(1);assert.ok(!inspect().includes('inspection-line'));[0,1,2,3].forEach(openBox);assert.equal(inspect().split('<span>시험 대상</span>').length-1,4);assert.equal(inspect().split('<strong>HS-10</strong>').length-1,1);selectBox(badBox());assert.ok(inspect().includes('inspection-selected'));checkMini();assert.equal(s.phase,'result');
 for(let d=0;d<6;d++)for(let i=0;i<3;i++){start(d,3);lunchChoice(i);assert.equal(s.phase,'result');assert.ok(Number.isFinite(s.energy))}
 let completed=0;
+start(0,8);s.city=[4,2,8];s.local.pick=[0,3];
+assert.equal(plannedCity().join(','),'7,3,8');
+assert.equal(s.city.join(','),'4,2,8');
+submitOps();assert.equal(s.city.join(','),'7,3,8');
+start(0,0);
+s.bagSlots=Array(12).fill('기존 메모');s.pendingPack='새 단서';s.bag.push('새 단서');s.phase='result';
+advance();assert.equal(s.step,1);assert.equal(s.pendingPack,null);assert.ok(s.bag.includes('새 단서'));
 start(2,4);
 assert.equal(stockRemainder(),100);
 for(const [piece,bin] of [[0,0],[1,0],[2,1],[4,1],[5,2]]){pickStockPiece(piece);moveStockPiece(bin)}

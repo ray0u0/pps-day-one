@@ -572,3 +572,8 @@
 .call-results{display:grid;gap:8px;padding:0;margin:10px 0;list-style:none}
 .call-results li{display:grid;gap:4px;padding:8px 12px;border:1px solid #becbbb;border-radius:6px;background:#f4f6ef;font-size:14px;line-height:1.5}
 .call-results strong{font-size:15px}
+
+.plan-preview-label{margin-top:14px;font-weight:750}
+.plan-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:6px}
+.plan-preview>div{display:grid;gap:3px;background:#eef3e9;border-radius:6px;padding:8px;font-size:14px}
+.plan-preview small{color:#315b46}
