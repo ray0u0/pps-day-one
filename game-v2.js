@@ -711,7 +711,18 @@ function ending(){
 function downloadReport(){const text=`오늘부터 조달청 — 첫 발령, 그다음 이야기\n${s.name} / ${endTitle()}\n부서: ${s.route.map(x=>DEPTS[x.dept].name).join(' → ')}\n모든 사건과 수치는 가상입니다.\n\n`+s.log.map(e=>`${e.title}\n${e.text}`).join('\n\n');const u=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=u;a.download='오늘부터_조달청_나의이야기.txt';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);toast('이야기 기록을 저장했습니다.')}
 function goHome(){if(s&&!home)save();landing();window.scrollTo({top:0,behavior:'instant'})}
 function showLog(){pauseAuto();modal('내 선택이 만든 이야기',s?.log?.length?`<ul class="report-list">${s.log.map(e=>`<li><span class="chip">${DEPTS[e.dept].name}</span><h3 style="font-size:17px;margin-top:10px">${e.title}</h3><p>${e.text}</p></li>`).join('')}</ul>`:'<p>첫 선택부터 이곳에 이야기가 쌓입니다.</p>')}
-function showSources(){pauseAuto();modal('조달청 탐험 노트',`<p>조직·업무·정책 안내를 바탕으로 소재를 구성했습니다. 사건과 인물, 부서의 협업 방식, 게임 규칙은 창작입니다.</p>${SOURCES.map(x=>`<div class="badge"><h3>${x.title}</h3><p>${x.fact}</p><a style="font-size:12px" href="${x.url}" target="_blank" rel="noopener noreferrer">공식 자료 읽기 ↗</a></div>`).join('')}<p class="fine">확인일: 2026.11.11. 공개 업무·정책 페이지 중심으로 조사했습니다. 사이트 전체나 비공개 자료를 수집했다는 의미가 아닙니다. 과거 연도 정책과 현재 절차는 구분해야 합니다.</p>`)}
+function showSources(){
+ pauseAuto();
+ const groups=[['게임 속 부서 업무',[0,1,2,3,4,5]],['기업 상담과 지원',[10,6,7]],['조달청의 다른 업무',[8,9,11]]];
+ const sections=groups.map(([name,indices],group)=>{
+  const cards=indices.map(i=>{
+   const source=SOURCES[i];
+   return '<article class="source-card"><h3>'+esc(source.title)+'</h3><p>'+esc(source.fact)+'</p><a href="'+esc(source.url)+'" target="_blank" rel="noopener noreferrer">조달청 공식 자료 열기 ↗<span class="sr"> · '+esc(source.title)+' (새 탭)</span></a></article>';
+  }).join('');
+  return '<details class="source-group" '+(group===0?'open':'')+'><summary>'+name+'</summary><div class="source-grid">'+cards+'</div></details>';
+ }).join('');
+ modal('조달청 탐험 노트','<div class="source-notes"><p class="source-intro">게임에서 만난 업무와 제도를 조달청 자료에서 더 알아볼 수 있어요. 게임 속 사건과 퍼즐은 가상의 사례입니다.</p>'+sections+'</div>');
+}
 function showGuide(){pauseAuto();modal('플레이 안내',`<div class="badge"><h3>이 게임은</h3><p>조달청 <b>한 부서</b> 발령으로 업무 맥락을 짧게 체험하는 <b>비공식 소개용</b> 이야기입니다. 실제 절차·권한과 다릅니다.</p></div><div class="badge"><h3>현장별 준비도</h3><p>학교·산업단지·문화관 각 8점. <b>5점+</b> 준비 끝. 선택 칩에 +숫자가 보이면 여기에 쌓입니다.</p></div><div class="badge"><h3>힘 · 동료 도움 (보조)</h3><p><b>오늘 남은 힘</b>은 바쁨(일하면 줄고 점심에 회복). <b>동료 도움</b>은 협업(높으면 돌발·밤 업무 일부가 열림).</p></div><div class="badge"><h3>부서마다 다른 체험</h3><p>미니게임과 핵심 업무는 발령 부서마다 다릅니다. 다시 시작하면 다른 부서를 볼 수 있어요.</p></div><div class="badge"><h3>소리</h3><p>기본은 소리 켜짐이에요. 새 게임이나 이어하기를 누르면 배경음이 시작됩니다.</p></div><p class="fine">자동 진행 · 로컬 저장 · 장면 끝에 조달청 탐험 노트</p><button class="btn full" onclick="closeModal()">시작할게요 →</button>`)}
 function showAbout(){pauseAuto();modal('첫 발령, 그다음 이야기',`<p>조달청 <b>한 부서</b> 발령으로 “무슨 기관인지”를 짧게 알아가는 비공식 체험 게임입니다. 실제 조달청 서비스가 아니며, 공무원의 실제 권한·인사·계약 절차를 재현하지 않습니다.</p><p>게임 화면·도시 그림·사건·프로그램은 새로 제작했습니다. 사용자가 제공한 조달청 로고와 나르미·달이 이미지를 HTML에 포함했습니다. 외부 파일을 불러오지 않고 실행되며 실시간 AI 연결이나 개인정보 전송은 없습니다. 배경은 제작한 짧은 mp3 루프를 HTML에 넣었고, 클릭 효과음은 Web Audio로 생성합니다. 외부 주소에서 음원을 불러오지 않습니다. 생성형 AI를 자료 정리와 기획·코딩 보조에 활용했습니다.</p><p>이번 버전은 반복 업무를 이야기·탐색·퍼즐·관계·선택으로 교체하고 한 시즌 한 부서로 진행합니다. 이전 부서 이동 화면에 저장된 기록도 자동으로 이어집니다. 구버전 저장 기록은 삭제하지 않으며 새 이야기의 저장 공간은 별도로 사용합니다.</p><button class="btn outline" onclick="closeModal();showSources()">공식 자료와 참고 범위 확인 →</button>`)}
 document.addEventListener('visibilitychange',()=>{if(!bgm||!sound)return;if(document.hidden)bgm.pause();else bgm.play().catch(()=>{})});

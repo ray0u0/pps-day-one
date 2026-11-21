@@ -634,3 +634,15 @@
  .event-dialog .supply-grid-test .supply-test-card{min-height:0;padding:10px;gap:5px}
  .event-dialog .supply-grid-test .supply-test-card .pixel-icon{width:34px;height:34px}
 }
+
+.modal:has(.source-notes){width:min(800px,100%);max-width:800px;max-height:calc(100dvh - 24px);overflow:auto}
+.source-notes .source-intro{font-size:16px;line-height:1.65;margin:0 0 16px}
+.source-group{border:1px solid #bdcbbb;border-radius:8px;margin:10px 0;background:#f4f7ef}
+.source-group summary{cursor:pointer;padding:12px 14px;font-size:17px;font-weight:750}
+.source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:0 10px 10px}
+.source-card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fffdf6;border:1px solid #d9e0d4;border-radius:6px;padding:12px;word-break:keep-all;overflow-wrap:anywhere}
+.source-card h3,.source-card p{margin:0}
+.source-card h3{font-size:16px}
+.source-card p{font-size:15px;line-height:1.6}
+.source-card a{display:inline-flex;align-items:center;min-height:44px;margin-top:auto;font-size:14px;font-weight:700;color:#235644;text-decoration:underline}
+@media(max-width:600px){.source-grid{grid-template-columns:1fr}}
