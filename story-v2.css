@@ -657,3 +657,15 @@
  .chrome-focus .nav{flex-wrap:wrap;gap:4px}
  .chrome-focus .nav button{min-height:44px;padding:6px 8px}
 }
+
+.effect-chips .change-chip {
+ display:inline-flex;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:4px 8px;
+ padding:5px 10px;
+ font-size:13px;
+ font-variant-numeric:tabular-nums;
+}
+.change-chip > strong {font-size:18px;line-height:1.15}
+.change-current {border-left:1px solid currentColor;padding-left:8px;font-weight:400}
