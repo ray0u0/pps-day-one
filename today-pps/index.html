@@ -288,6 +288,7 @@
 
 
 
+
 /* STORY_V2 */
 .six{grid-template-columns:repeat(3,1fr)}.story-scene{border-radius:50px 8px 8px 8px;background:#dfe9dc;min-height:0}.story-scene svg{margin-top:30px}.hero-quote{padding:25px 32px 32px;background:#e9eddf}.hero-quote p{font-size:21px;font-weight:750;margin:10px 0}.hero h1{font-size:clamp(38px,3.8vw,54px);margin:16px 0}
 .hero .desc{font-size:15px;line-height:1.75}
@@ -1002,7 +1003,25 @@ function pixelCityArt(){
  const c=s?.city||[0,0,0],night=s?.phase==='end';
  const r=(x,y,w,h,color)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${color}"/>`;
  const tree=(x,y)=>r(x+6,y+16,4,10,'#785346')+r(x+2,y+4,12,16,'#387768')+r(x,y+8,16,8,'#438c71')+r(x+4,y,8,8,'#67a579');
- const buildings=c.map((v,i)=>{const x=30+i*110,lit=v>=CITY_OK,roof=['#b86b58','#547688','#5a7e70'][i];return `<g transform="translate(${x} 70)">${r(4,48,72,6,'#294c4e')}${r(0,10,76,40,['#efcda0','#b6c7c1','#dfd9b2'][i])}${i===1?r(4,-12,7,22,roof)+r(0,4,26,8,roof)+r(26,0,26,12,roof)+r(52,4,24,8,roof):r(-4,6,84,6,roof)+r(4,0,68,6,roof)+r(12,-6,52,6,roof)}${[9,29,49].map((xx,j)=>r(xx,19,13,14,'#365c69')+r(xx+2,21,9,10,v>j*2?'#ffe4a0':'#8bb1b4')+r(xx+6,21,1,10,'#48646b')).join('')}${r(33,36,12,14,'#466b67')}${r(35,38,4,8,'#b3d8cf')}<text x="38" y="-17" text-anchor="middle" font-size="8" font-weight="700" fill="${night?'#e4ece2':'#294e56'}">${CITY_SITES[i]}</text><text x="38" y="67" text-anchor="middle" font-size="7" fill="${night?'#d6e7da':'#365c54'}">${lit?'준비 완료':v>=CITY_MID?'준비 중':'점검 필요'}</text></g>`}).join('');
+ const buildings=c.map((v,i)=>{
+  const x=30+i*110,lit=v>=CITY_OK;
+  const windowFill=lit?'#ffe4a0':'#8bb1b4',door='#365c69';
+  const school=r(-2,11,80,39,'#efcda0')+r(-5,7,86,6,'#b86b58')+r(30,0,16,8,'#b86b58')+
+   r(36,-12,2,13,door)+r(38,-12,13,7,'#f7be69')+
+   [6,22,44,60].map(wx=>r(wx,19,10,12,door)+r(wx+2,21,6,8,windowFill)).join('')+
+   r(32,34,12,16,door)+r(35,36,6,9,windowFill)+r(5,54,17,2,'#f4efd5');
+  const factory=r(0,15,76,35,'#b6c7c1')+r(62,-9,9,27,'#547688')+
+   '<path d="M0 15 19 4v11L38 4v11L57 4v11h19v6H0z" fill="#547688"/>'+
+   r(9,26,28,9,door)+r(11,28,24,5,windowFill)+r(49,29,21,21,door)+
+   [33,38,43].map(y=>r(51,y,17,1,'#8ba5a6')).join('');
+  const culture=r(-1,15,78,34,'#b5a9cf')+r(-5,14,86,7,'#554470')+r(9,5,58,9,'#756391')+
+   r(18,9,40,8,'#543f62')+r(26,12,24,2,'#f9d894')+
+   r(17,23,42,26,'#4c456a')+
+   [21,32,43].map(wx=>r(wx,26,8,21,windowFill)).join('')+
+   r(4,27,9,14,'#f5d5a7')+r(63,27,9,14,'#edb1b7')+
+   r(12,49,52,3,'#756391')+r(6,52,64,3,'#dfd5e4');
+  return `<g transform="translate(${x} 70)">${[school,factory,culture][i]}<text x="38" y="-17" text-anchor="middle" font-size="8" font-weight="700" fill="${night?'#e4ece2':'#294e56'}">${CITY_SITES[i]}</text><text x="38" y="67" text-anchor="middle" font-size="7" fill="${night?'#d6e7da':'#365c54'}">${lit?'준비 완료':v>=CITY_MID?'준비 중':'점검 필요'}</text></g>`;
+ }).join('');
  return `<svg class="pixel-city" viewBox="0 0 360 190" role="img" aria-label="새봄학교, 산업단지, 모아문화관의 준비 상황" shape-rendering="crispEdges">${r(0,0,360,190,night?'#243c52':'#c7e6e8')}${r(306,16,16,16,night?'#fff0b8':'#f9cf7c')}<g class="pixel-cloud">${r(36,26,34,6,night?'#587184':'#eff7ef')}${r(44,20,18,6,night?'#587184':'#eff7ef')}${r(182,36,42,6,night?'#587184':'#eff7ef')}</g>${r(0,86,360,104,night?'#3d6658':'#91b58b')}${r(0,143,360,31,'#657a7a')}${Array.from({length:15},(_,i)=>r(i*26,157,12,2,'#dce3c3')).join('')}${buildings}${tree(8,103)}${tree(115,101)}${tree(232,103)}${tree(339,100)}<g transform="translate(${25+(s?.step||0)*26} 147) scale(.8)">${pixelIcon('truck')}</g>${r(0,176,360,14,night?'#345548':'#7aa16f')}${[18,72,135,227,309].map(x=>r(x,182,3,3,'#efd893')+r(x+4,184,3,3,'#c1d99e')).join('')}</svg>`;
 }
 
